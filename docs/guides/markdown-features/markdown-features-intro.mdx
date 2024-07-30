@@ -1,0 +1,235 @@
+---
+id: introduction
+description: Docusaurus는 MDX를 사용합니다. Markdown을 작성할 때 Docusaurus 특정 기능에 대해 자세히 알아보세요.
+slug: /markdown-features
+---
+
+# Markdown 기능
+
+import BrowserWindow from '@site/src/components/BrowserWindow';
+
+Docusaurus는 주요 콘텐츠 작성 형식으로 **[Markdown](https://commonmark.org/)**을 사용합니다.
+
+:::tip Markdown 배우기
+
+[10분 만에 Markdown을 배울 수 있습니다](https://commonmark.org/help/).
+
+:::
+
+Docusaurus는 **대화형 문서**를 만드는 데 도움이 되는 현대적인 도구를 사용합니다.
+
+**[MDX](https://mdxjs.com/)** 컴파일러는 **Markdown 파일을 React 컴포넌트로 변환**하고 Markdown 콘텐츠에서 JSX를 사용할 수 있게 합니다. 이를 통해 콘텐츠 내에 React 컴포넌트를 쉽게 삽입하고 즐거운 학습 경험을 만들 수 있습니다.
+
+:::tip MDX 플레이그라운드 사용하기
+
+**[MDX 플레이그라운드](https://mdxjs.com/playground/)**가 여러분의 새로운 친구가 될 것입니다!
+
+MDX 컴파일러가 Markdown을 React로 변환하는 방식을 보여주는 매우 유용한 디버깅 도구입니다.
+
+**옵션**: 올바른 형식(MDX 또는 CommonMark)과 Docusaurus가 사용하는 다음 플러그인을 선택하세요: `remark-gfm`, `remark-directive`, `rehype-raw`.
+
+:::
+
+## MDX vs. CommonMark {#mdx-vs-commonmark}
+
+Docusaurus는 MDX 컴파일러를 사용하여 `.md`와 `.mdx` 파일 모두를 React 컴포넌트로 컴파일하지만, 설정에 따라 **구문이 다르게 해석될 수 있습니다**.
+
+MDX 컴파일러는 [2가지 형식](https://mdxjs.com/packages/mdx/#optionsformat)을 지원합니다:
+
+- [MDX 형식](https://mdxjs.com/docs/what-is-mdx/): JSX 사용을 허용하는 강력한 파서
+- [CommonMark 형식](https://commonmark.org/): JSX 사용을 허용하지 않는 표준 준수 Markdown 파서
+
+기본적으로 **Docusaurus v3는 역사적인 이유로 모든 파일에 대해 MDX 형식을 사용합니다** (`.md` 파일 포함).
+
+[`siteConfig.markdown.format`](../../api/docusaurus.config.js.mdx#markdown) 설정이나 `format: md` 프론트매터를 사용하여 **CommonMark를 선택**할 수 있습니다.
+
+:::tip CommonMark 사용 방법
+
+CommonMark를 사용할 계획이라면 [`siteConfig.markdown.format: 'detect'`](../../api/docusaurus.config.js.mdx#markdown) 설정을 권장합니다. 파일 확장자에 따라 적절한 형식이 자동으로 선택됩니다:
+
+- `.md` 파일은 CommonMark 형식을 사용합니다
+- `.mdx` 파일은 MDX 형식을 사용합니다
+
+:::
+
+:::danger 실험적인 CommonMark 지원
+
+CommonMark 지원은 **실험적**이며 현재 몇 가지 [제한 사항](https://github.com/facebook/docusaurus/issues/9092)이 있습니다.
+
+:::
+
+## 표준 기능 {#standard-features}
+
+Markdown은 읽기 쉬운 구문으로 형식이 지정된 콘텐츠를 작성할 수 있게 해주는 구문입니다.
+
+```md
+### 내 문서 섹션
+
+**굵은** 텍스트, _기울임꼴_ 텍스트, 그리고 [링크](/)가 포함된 Hello world 메시지
+
+![이미지 alt](/img/docusaurus.png)
+```
+
+```mdx-code-block
+<BrowserWindow>
+
+<h3>내 문서 섹션</h3>
+
+**굵은** 텍스트, _기울임꼴_ 텍스트, 그리고 [링크](/)가 포함된 Hello world 메시지
+
+![이미지 alt](/img/docusaurus.png)
+
+</BrowserWindow>
+```
+
+<details>
+
+<summary>Markdown은 선언적입니다</summary>
+
+일부는 Markdown과 HTML 사이에 1:1 상관 관계가 있다고 가정할 수 있습니다. 예를 들어, `![Preview](/img/docusaurus.png)`가 항상 그대로 `<img src="/img/docusaurus.png" alt="Preview" />`가 된다고 생각할 수 있습니다. 하지만 _그렇지 않습니다_.
+
+Markdown 구문 `![message](url)`는 여기에 이미지를 삽입해야 한다는 것을 선언적으로 Docusaurus에 알려줄 뿐입니다. 하지만 우리는 [파일 경로를 URL 경로로 변환](./markdown-features-assets.mdx#images)하는 등의 다른 작업을 수행할 수 있으므로, 생성된 마크업은 다른 Markdown 렌더러의 출력이나 동등한 JSX/HTML 코드로 단순히 손으로 옮긴 것과 다를 수 있습니다.
+
+일반적으로 마크업의 _의미론_(` ``` `는 [코드 블록](./markdown-features-code-blocks.mdx)이 되고, `>`는 [인용문](#quotes)이 되는 등)만 가정해야 하며, 실제 컴파일된 출력을 가정해서는 안 됩니다.
+
+</details>
+
+## 프론트매터 {#front-matter}
+
+프론트매터는 Markdown 파일에 메타데이터를 추가하는 데 사용됩니다. 모든 콘텐츠 플러그인은 자체 프론트매터 스키마를 가지고 있으며, 프론트매터를 사용하여 콘텐츠나 다른 구성에서 추론된 기본 메타데이터를 보강합니다.
+
+프론트매터는 파일의 맨 위에 제공되며 세 개의 대시 `---`로 둘러싸여 있습니다. 내용은 [YAML](https://yaml.org/spec/1.2.2/)로 파싱됩니다.
+
+```md
+---
+title: 내 문서 제목
+more_data:
+  - 제공될 수 있습니다
+  - as: 객체
+    or: 배열
+---
+```
+
+:::info
+
+각 공식 플러그인의 API 문서에는 지원되는 속성이 나열되어 있습니다:
+
+- [Docs 프론트매터](../../api/plugins/plugin-content-docs.mdx#markdown-front-matter)
+- [Blog 프론트매터](../../api/plugins/plugin-content-blog.mdx#markdown-front-matter)
+- [Pages 프론트매터](../../api/plugins/plugin-content-pages.mdx#markdown-front-matter)
+
+:::
+
+:::tip 프론트매터 향상하기
+
+[Markdown 구성 `parseFrontMatter` 함수](../../api/docusaurus.config.js.mdx#markdown)를 사용하여 자체 프론트매터 파서를 제공하거나 기본 파서를 향상시킬 수 있습니다.
+
+기본 파서를 재사용하여 사용자 정의 독점 로직으로 감싸는 것이 가능합니다. 이를 통해 편리한 프론트매터 변환, 단축키를 구현하거나 Docusaurus 플러그인이 지원하지 않는 프론트매터를 사용하여 외부 시스템과 통합할 수 있습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  markdown: {
+    // highlight-start
+    parseFrontMatter: async (params) => {
+      // 기본 파서 재사용
+      const result = await params.defaultParseFrontMatter(params);
+
+      // 프론트매터 설명 플레이스홀더 처리
+      result.frontMatter.description =
+        result.frontMatter.description?.replaceAll('{{MY_VAR}}', 'MY_VALUE');
+
+      // 자체 프론트매터 단축키 만들기
+      if (result.frontMatter.i_do_not_want_docs_pagination) {
+        result.frontMatter.pagination_prev = null;
+        result.frontMatter.pagination_next = null;
+      }
+
+      // 다른 시스템에서 온 지원되지 않는 프론트매터 이름 바꾸기
+      if (result.frontMatter.cms_seo_summary) {
+        result.frontMatter.description = result.frontMatter.cms_seo_summary;
+        delete result.frontMatter.cms_seo_summary;
+      }
+
+      return result;
+    },
+    // highlight-end
+  },
+};
+```
+
+:::
+
+## 인용문 {#quotes}
+
+Markdown 인용문은 아름답게 스타일링되어 있습니다:
+
+```md
+> 오픈 소스 문서 웹사이트를 쉽게 유지 관리할 수 있습니다.
+>
+> — Docusaurus
+```
+
+<BrowserWindow>
+
+> 오픈 소스 문서 웹사이트를 쉽게 유지 관리할 수 있습니다.
+>
+> — Docusaurus
+
+</BrowserWindow>
+
+## 상세 정보 {#details}
+
+Markdown은 HTML 요소를 포함할 수 있으며, [`details`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) HTML 요소는 아름답게 스타일링되어 있습니다:
+
+{/* prettier-ignore */}
+````md
+### 상세 정보 요소 예시
+
+<details>
+  <summary>토글하세요!</summary>
+
+  이것은 상세 내용입니다
+
+  ```js
+  console.log("코드 블록을 포함한 Markdown 기능을 사용할 수 있습니다");
+  ```
+
+  **굵은 글씨**와 _기울임꼴_ 텍스트, 그리고 [인라인 링크](https://docusaurus.io)를 포함한 Markdown을 여기서 사용할 수 있습니다
+  <details>
+    <summary>중첩된 토글! 안에 놀라운 것이 있습니다...</summary>
+
+    😲😲😲😲😲
+  </details>
+</details>
+````
+
+````mdx-code-block
+<BrowserWindow>
+
+<h3>상세 정보 요소 예시</h3>
+
+<details>
+  <summary>토글하세요!</summary>
+
+  이것은 상세 내용입니다
+
+  ```js
+  console.log("코드 블록을 포함한 Markdown 기능을 사용할 수 있습니다");
+  ```
+
+  **굵은 글씨**와 _기울임꼴_ 텍스트, 그리고 [인라인 링크](https://docusaurus.io)를 포함한 Markdown을 여기서 사용할 수 있습니다
+  <details>
+    <summary>중첩된 토글! 안에 놀라운 것이 있습니다...</summary>
+
+    😲😲😲😲😲
+  </details>
+</details>
+
+</BrowserWindow>
+````
+
+:::info
+
+`<summary>`를 한 줄로 유지하는 것이 좋습니다. [MDX는 줄 바꿈에 대해 추가 HTML `<p>` 단락을 생성한다는 점](https://mdxjs.com/migrating/v2/#jsx)을 명심하세요. 의문이 있다면 [MDX 플레이그라운드](https://mdxjs.com/playground/)를 사용하여 `<details>` 렌더링 문제를 해결하세요.
+
+:::

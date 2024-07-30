@@ -1,0 +1,140 @@
+---
+description: Docusaurus는 TypeScript로 작성되었으며 일급 TypeScript 지원을 제공합니다.
+---
+
+# TypeScript 지원
+
+Docusaurus는 TypeScript로 작성되었으며 일급 TypeScript 지원을 제공합니다.
+
+최소 필요 버전은 **TypeScript 5.1**입니다.
+
+## 초기화 {#initialization}
+
+Docusaurus는 TypeScript 테마 컴포넌트의 작성과 사용을 지원합니다. 초기화 템플릿이 TypeScript 변형을 제공하는 경우, `--typescript` 플래그를 사용하여 전체 TypeScript 지원이 가능한 사이트를 직접 초기화할 수 있습니다.
+
+```bash
+npx create-docusaurus@latest my-website classic --typescript
+```
+
+아래는 기존 프로젝트를 TypeScript로 마이그레이션하는 방법에 대한 가이드입니다.
+
+## 설정 {#setup}
+
+프로젝트에 다음 패키지들을 추가하세요:
+
+```bash npm2yarn
+npm install --save-dev typescript @docusaurus/module-type-aliases @docusaurus/tsconfig @docusaurus/types
+```
+
+그런 다음 프로젝트 루트에 다음 내용으로 `tsconfig.json`을 추가하세요:
+
+```json title="tsconfig.json"
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": "."
+  }
+}
+```
+
+Docusaurus는 이 `tsconfig.json`을 사용하여 프로젝트를 컴파일하지 않습니다. 이는 더 나은 에디터 경험을 위해 추가되었지만, 직접 또는 CI에서 코드의 타입을 체크하기 위해 `tsc`를 실행하도록 선택할 수 있습니다.
+
+이제 TypeScript 테마 컴포넌트를 작성하기 시작할 수 있습니다.
+
+## 설정 파일 타입 지정 {#typing-config}
+
+Docusaurus에서 TypeScript 설정 파일을 사용하는 것이 가능합니다.
+
+```ts title="docusaurus.config.ts"
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
+
+// highlight-next-line
+const config: Config = {
+  title: 'My Site',
+  favicon: 'img/favicon.ico',
+
+  /* Your site config here */
+
+  presets: [
+    [
+      'classic',
+      {
+        /* Your preset config here */
+        // highlight-next-line
+      } satisfies Preset.Options,
+    ],
+  ],
+
+  themeConfig: {
+    /* Your theme config here */
+    // highlight-next-line
+  } satisfies Preset.ThemeConfig,
+};
+
+export default config;
+```
+
+<details>
+  <summary>`.js` 파일 내에서 [JSDoc 타입 주석](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html)을 사용하는 것도 가능합니다:</summary>
+
+기본적으로 Docusaurus TypeScript 설정은 JavaScript 파일의 타입을 체크하지 않습니다.
+
+`// @ts-check` 주석은 `npx tsc`를 실행할 때 설정 파일이 적절히 타입 체크되도록 보장합니다.
+
+```js title="docusaurus.config.js"
+// highlight-next-line
+// @ts-check
+
+// highlight-next-line
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  tagline: 'Dinosaurs are cool',
+  favicon: 'img/favicon.ico',
+
+  /* Your site config here */
+
+  presets: [
+    [
+      '@docusaurus/preset-classic',
+      // highlight-next-line
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      (
+        {
+          /* Your preset config here */
+        }
+      ),
+    ],
+  ],
+  themeConfig:
+    // highlight-next-line
+    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    (
+      {
+        /* Your theme config here */
+      }
+    ),
+};
+
+export default config;
+```
+
+</details>
+
+:::tip
+
+타입 주석은 매우 유용하며 IDE가 설정 객체의 타입을 이해하는 데 도움을 줍니다!
+
+최고의 IDE(VS Code, WebStorm, IntelliJ...)는 멋진 자동 완성 경험을 제공할 것입니다.
+
+:::
+
+## TypeScript 테마 컴포넌트 스위즐링 {#swizzling-typescript-theme-components}
+
+TypeScript 테마 컴포넌트를 지원하는 테마의 경우, `swizzle` 명령 끝에 `--typescript` 플래그를 추가하여 TypeScript 소스 코드를 얻을 수 있습니다. 예를 들어, 다음 명령은 `src/theme/Footer`에 `index.tsx`와 `styles.module.css`를 생성합니다.
+
+```bash npm2yarn
+npm run swizzle @docusaurus/theme-classic Footer -- --typescript
+```
+
+[`theme-classic`](./api/themes/theme-classic.mdx), [`theme-live-codeblock`](./api/themes/theme-live-codeblock.mdx), [`theme-search-algolia`](./api/themes/theme-search-algolia.mdx)를 포함한 모든 공식 Docusaurus 테마는 TypeScript 테마 컴포넌트를 지원합니다. Docusaurus 테마 패키지 작성자로서 TypeScript 지원을 추가하고 싶다면, [Lifecycle APIs 문서](./api/plugin-methods/extend-infrastructure.mdx#getTypeScriptThemePath)를 참조하세요.

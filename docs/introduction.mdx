@@ -1,0 +1,194 @@
+---
+설명: Docusaurus는 웹사이트를 빠르게 구축하고 실행할 수 있도록 처음부터 쉽게 설치하고 사용할 수 있도록 설계되었습니다.
+슬러그: /
+---
+
+# 소개
+
+⚡️ Docusaurus는 **아름다운 문서 사이트를 순식간에 제작**할 수 있도록 도와줍니다.
+
+💸 맞춤형 기술 스택을 구축하는 것d은 비용이 많이 듭니다. 대신 **콘텐츠에 집중**하고 Markdown 파일만 작성하세요.
+
+💥 더 많은 기능을 원하시나요? 버전 관리, 국제화(i18n), 검색, 테마 커스터마이징과 같은 **고급 기능**을 사용해보세요.
+
+💅 영감을 얻기 위해 **[최고의 Docusaurus 사이트](/showcase?tags=favorite)**를 확인하고 **[사용 후기](https://twitter.com/sebastienlorber/timelines/1392048416872706049)**를 읽어보세요.
+
+🧐 Docusaurus는 **정적 사이트 생성기**입니다. 빠른 클라이언트 측 탐색 기능을 갖춘 **단일 페이지 애플리케이션**을 구축하며, **React**의 모든 기능을 활용하여 사이트를 대화형으로 만듭니다. 기본적으로 **문서 기능**을 제공하지만 **모든 종류의 사이트**(개인 웹사이트, 제품, 블로그, 마케팅 랜딩 페이지 등)를 만드는 데 사용할 수 있습니다.
+
+![](/img/slash-introducing.svg)
+
+## 빠른 시작 ⏱️ {#fast-track}
+
+놀이를 통해 **5분** 만에 Docusaurus를 이해해보세요.
+
+새로운 Docusaurus 사이트를 만들고 **매우 짧은** 내장 튜토리얼을 따라해보세요.
+
+[Node.js](https://nodejs.org/en/download/)를 설치하고 새 Docusaurus 사이트를 만드세요:
+
+```bash
+npx create-docusaurus@latest my-website classic
+```
+
+사이트를 시작하세요:
+
+```bash
+cd my-website
+npx docusaurus start
+```
+
+Open [`http://localhost:3000`](http://localhost:3000) and follow the tutorial.
+
+:::tip
+
+**[docusaurus.new](https://docusaurus.new)**를 사용하여 브라우저에서 바로 Docusaurus를 테스트해보세요!
+
+또는 온라인으로 **[5분 튜토리얼](https://tutorial.docusaurus.io)**을 읽어보세요.
+
+:::
+
+## Docusaurus: 쉬워진 문서 작성
+
+[Algolia 커뮤니티 이벤트](https://www.algolia.com/)에서 [Meta 오픈 소스 팀](https://opensource.facebook.com/)이 Docusaurus에 대한 간단한 소개를 공유했습니다. 프로젝트 시작 방법, 플러그인 활성화, 문서 작성 및 블로깅과 같은 기능 설정 방법을 다뤘습니다.
+
+{/* cSpell:ignore Yhyx Sksg */}
+
+```mdx-code-block
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+
+<div className="video-container">
+  <LiteYouTubeEmbed
+    id="Yhyx7otSksg"
+    params="autoplay=1&autohide=1&showinfo=0&rel=0"
+    title="Docusaurus: Documentation Made Easy"
+    poster="maxresdefault"
+    webp
+  />
+</div>
+```
+
+## v1에서 마이그레이션 {#migrating-from-v1}
+
+Docusaurus v2+는 완전히 현대화된 도구 체인을 활용하여 Docusaurus v1을 완전히 재작성한 버전입니다. [v2의 공식 출시](https://docusaurus.io/blog/2022/08/01/announcing-docusaurus-2.0) 이후, 우리는 Docusaurus v1 대신 **Docusaurus v2+를 사용**할 것을 강력히 권장합니다. Docusaurus v1은 더 이상 사용되지 않습니다.
+
+이미 많은 [사용자](/showcase)들이 Docusaurus v2+를 사용하고 있습니다 ([트렌드](https://www.npmtrends.com/docusaurus-vs-@docusaurus/core)).
+
+**다음과 같은 경우 Docusaurus v2+를 사용하세요:**
+
+- :white_check_mark: 최신 Jamstack 문서 사이트를 원하는 경우
+- :white_check_mark: 클라이언트 측 라우팅을 갖춘 단일 페이지 애플리케이션(SPA)을 원하는 경우
+- :white_check_mark: React와 MDX의 모든 기능을 활용하고 싶은 경우
+- :white_check_mark: IE11 지원이 필요하지 않은 경우
+
+**다음과 같은 경우 [Docusaurus v1](https://v1.docusaurus.io/)을 사용하세요:**
+
+- :x: 단일 페이지 애플리케이션(SPA)을 원하지 않는 경우
+- :x: IE11 지원이 필요한 경우 (...정말 필요한가요? IE [이미 수명이 끝났고](https://docs.microsoft.com/en-us/lifecycle/products/internet-explorer-11) 더 이상 공식적으로 지원되지 않습니다)
+
+v2+로 업그레이드하려는 기존 v1 사용자는 [마이그레이션 가이드](./migration/index.mdx)를 참조할 수 있습니다.
+
+## 기능 {#features}
+
+Docusaurus는 개발자와 기여자 경험에 높은 주의를 기울여 구축되었습니다.
+
+- ⚛️ **💚과 React로 만들어짐**:
+  - React로 확장 및 커스터마이징
+  - 자체 React 컴포넌트를 제공하여 사이트의 브라우징 경험을 완전히 제어
+- 🔌 **플러그인 가능**:
+  - 기본 템플릿으로 사이트를 부트스트랩한 다음 고급 기능과 플러그인 사용
+  - 플러그인을 오픈 소스로 공개하여 커뮤니티와 공유
+- ✂️ **개발자 경험**:
+  - 지금 바로 문서 작성 시작
+  - 기여자들이 더 쉽게 유지보수할 수 있도록 범용 구성 진입점 제공
+  - 변경 사항에 대한 번개처럼 빠른 증분 빌드로 핫 리로딩
+  - 경로 기반 코드 및 데이터 분할
+  - GitHub Pages, Netlify, Vercel 및 기타 배포 서비스에 쉽게 게시
+
+우리의 공동 목표는 사용자가 필요한 것을 빠르게 찾고 제품을 더 잘 이해할 수 있도록 돕는 것입니다. 문서 사이트를 올바르고 잘 구축할 수 있도록 우리의 모범 사례를 공유합니다.
+
+- 🎯 **SEO 친화적**:
+  - 가능한 모든 경로에 대해 HTML 파일이 정적으로 생성됩니다.
+  - 페이지별 SEO를 통해 사용자가 직면한 문제와 직접 관련된 공식 문서에 바로 도달할 수 있도록 도와줍니다.
+- 📝 **MDX 지원**:
+  - Markdown에 JSX와 React를 포함한 대화형 컴포넌트를 작성하세요.
+  - 라이브 에디터에서 코드를 공유하여 사용자가 제품을 즉시 좋아하게 만드세요.
+- 🔍 **검색**: 전체 사이트를 검색할 수 있습니다.
+- 💾 **문서 버전 관리**: 프로젝트 릴리스와 문서를 동기화하는 데 도움이 됩니다.
+- 🌍 **국제화(i18n)**: 사이트를 여러 언어로 번역하세요.
+
+Docusaurus v2+는 모든 사용자에게 접근성이 높고 번개처럼 빠르게 작동하도록 태어났습니다.
+
+- ⚡️ **번개처럼 빠름**. Docusaurus v2+는 콘텐츠를 빛처럼 빠르게 로드하는 [PRPL 패턴](https://developers.google.com/web/fundamentals/performance/prpl-pattern/)을 따릅니다.
+- 🦖 **접근성**. 접근성에 주의를 기울여 모든 사용자가 동등하게 사이트에 접근할 수 있도록 합니다.
+
+## 디자인 원칙 {#design-principles}
+
+- **배울 것이 적음**. Docusaurus는 API가 매우 작기 때문에 배우고 사용하기 쉬워야 합니다. 사용자들은 더 많은 코드와 시간이 필요하더라도 대부분의 것을 달성할 수 있을 것입니다. 잘못된 추상화를 사용하는 것보다는 차라리 추상화를 사용하지 않는 것이 낫습니다. 우리는 사용자들이 잘못된 추상화를 우회하기 위해 어려움을 겪는 상황을 원하지 않습니다. 필수적인 강연 - [작은 API 범위](https://www.youtube.com/watch?v=4anAwXYqLG8).
+- **직관적**. 사용자들은 Docusaurus 프로젝트의 디렉토리를 보거나 새로운 기능을 추가할 때 압도감을 느끼지 않을 것입니다. 직관적이고 익숙한 접근 방식을 사용하여 쉽게 구축할 수 있어야 합니다.
+- **계층화된 아키텍처**. 스택의 각 계층(콘텐츠/테마/스타일링) 간의 관심사 분리가 명확해야 합니다 - 잘 추상화되고 모듈화되어야 합니다.
+- **합리적인 기본값**. 일반적이고 인기 있는 성능 최적화와 구성이 사용자를 위해 수행되지만, 사용자는 이를 재정의할 수 있는 옵션을 가집니다.
+- **벤더 종속 없음**. 사용자는 기본 플러그인이나 CSS를 사용할 필요가 없지만, 사용이 강력히 권장됩니다. React Loadable과 React Router와 같은 특정 핵심 인프라는 기본적인 성능 최적화를 수행하기 때문에 교체할 수 없지만, 더 높은 수준의 것들은 그렇지 않습니다. Markdown 엔진, CSS 프레임워크, CSS 방법론 및 기타 아키텍처의 선택은 전적으로 사용자에게 달려 있습니다.
+
+우리는 개발자로서 라이브러리가 어떻게 작동하는지 아는 것이 그것을 더 잘 사용하는 데 도움이 된다고 믿습니다. 따라서 우리는 Docusaurus의 아키텍처와 다양한 구성 요소를 설명하는 데 노력을 기울이고 있습니다. 이를 통해 사용자들이 도구에 대해 더 깊이 이해하고 더욱 능숙하게 사용할 수 있기를 희망합니다.
+
+## 다른 도구와의 비교 {#comparison-with-other-tools}
+
+모든 정적 사이트 생성기 중에서 Docusaurus는 문서 사이트에 특별히 초점을 맞추고 있으며 많은 기본 기능을 제공합니다.
+
+우리는 또한 다른 주요 정적 사이트 생성기를 연구했으며, 비교에 대한 우리의 통찰을 공유하고 싶습니다. 이를 통해 여러분이 다양한 선택지 중에서 길을 찾는 데 도움이 되기를 바랍니다.
+
+### Gatsby {#gatsby}
+
+[Gatsby](https://www.gatsbyjs.com/)는 많은 기능을 갖추고 있고, 풍부한 플러그인 생태계를 가지고 있으며, Docusaurus가 할 수 있는 모든 것을 할 수 있습니다. 당연히 그만큼 학습 곡선이 높습니다. Gatsby는 많은 것을 잘 수행하며 다양한 유형의 웹사이트를 구축하는 데 적합합니다. 반면에 Docusaurus는 한 가지를 매우 잘하는 것에 집중합니다. 즉, Docusaurus의 목적은 콘텐츠를 작성하고 게시하는 최고의 도구가 되는 것입니다.
+
+GraphQL은 Gatsby의 핵심이지만, Gatsby 사이트를 구축하기 위해 반드시 GraphQL이 필요한 것은 아닙니다. 정적 웹사이트를 구축할 때 대부분의 경우 GraphQL이 제공하는 유연성이 필요하지 않습니다.
+
+Docusaurus v2+의 많은 측면은 Gatsby의 장점에서 영감을 받았으며 좋은 대안이 될 수 있습니다.
+
+[Docz](https://github.com/pedronauck/docz)는 문서 웹사이트를 만들기 위한 Gatsby 테마입니다. 현재 Docusaurus보다 기능이 적습니다.
+
+### Next.js {#nextjs}
+
+[Next.js](https://nextjs.org/)는 또 다른 매우 인기 있는 하이브리드 React 프레임워크입니다. 좋은 문서 웹사이트를 구축하는 데 도움이 될 수 있지만, 문서 사용 사례에 특화되어 있지 않으며 Docusaurus가 기본적으로 제공하는 것을 구현하려면 훨씬 더 많은 작업이 필요할 것입니다.
+
+[Nextra](https://github.com/shuding/nextra)는 Next.js 위에 구축된 독단적인 정적 사이트 생성기입니다. 현재 Docusaurus보다 기능이 적습니다.
+
+### VitePress {#vitepress}
+
+[VitePress](https://vitepress.dev/)는 Docusaurus와 많은 유사점을 가지고 있습니다 - 둘 다 콘텐츠 중심 웹사이트에 크게 초점을 맞추고 있으며 맞춤형 문서 기능을 기본적으로 제공합니다. 그러나 VitePress는 Vue를 기반으로 하고, Docusaurus는 React를 기반으로 합니다. Vue 기반 솔루션을 원한다면 VitePress가 좋은 선택이 될 것입니다.
+
+### MkDocs {#mkdocs}
+
+[MkDocs](https://www.mkdocs.org/)는 Docusaurus와 유사한 가치 제안을 가진 인기 있는 Python 정적 사이트 생성기입니다.
+
+단일 페이지 애플리케이션이 필요하지 않고 React를 활용할 계획이 없다면 좋은 선택이 될 수 있습니다.
+
+[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)는 아름다운 테마입니다.
+
+### Docsify {#docsify}
+
+[Docsify](https://docsify.js.org/)는 문서 웹사이트를 쉽게 만들 수 있게 해주지만, 정적 사이트 생성기가 아니며 SEO에 친화적이지 않습니다.
+
+### GitBook {#gitbook}
+
+[GitBook](https://www.gitbook.com/)은 매우 깔끔한 디자인을 가지고 있으며 많은 오픈 소스 프로젝트에서 사용되었습니다. 오픈 소스 도구보다는 상업적 제품에 초점을 맞추면서, 오픈 소스 프로젝트의 문서 사이트 요구 사항에 더 이상 맞지 않게 되었습니다. 그 결과 많은 프로젝트가 다른 제품으로 전환했습니다. Redux가 Docusaurus로 전환한 이유에 대해 [여기](https://github.com/reduxjs/redux/issues/3161)에서 읽어볼 수 있습니다.
+
+현재 GitBook은 오픈 소스 및 비영리 팀에게만 무료입니다. Docusaurus는 모든 사람에게 무료입니다.
+
+### Jekyll {#jekyll}
+
+[Jekyll](https://github.com/jekyll/jekyll)은 가장 성숙한 정적 사이트 생성기 중 하나이며 사용하기에 훌륭한 도구였습니다 - 사실, Docusaurus 이전에 Facebook의 대부분의 오픈 소스 웹사이트는 Jekyll로 구축되었습니다! 시작하기가 매우 쉽습니다. 우리는 Jekyll로 정적 사이트를 구축하는 것과 비슷한 개발자 경험을 제공하고자 합니다.
+
+정적으로 생성된 HTML과 `<script />` 태그를 사용하여 추가된 상호 작용성과 비교하면, Docusaurus 사이트는 React 앱입니다. 현대적인 JavaScript 생태계 도구를 사용하여 문서 사이트의 성능, 자산 빌드 파이프라인 및 최적화, 그리고 설정의 용이성에 대한 새로운 표준을 설정하고자 합니다.
+
+## 정보 유지하기 {#staying-informed}
+
+- [GitHub](https://github.com/facebook/docusaurus)
+- [Twitter](https://twitter.com/docusaurus)
+- [블로그](/blog)
+- [Discord](https://discord.gg/docusaurus)
+
+## 무언가 빠졌나요? {#something-missing}
+
+문서에 문제가 있거나 문서 또는 프로젝트 전반을 개선할 수 있는 제안이 있다면 [이슈를 제기](https://github.com/facebook/docusaurus)해 주시거나 [@docusaurus](https://twitter.com/docusaurus) Twitter 계정을 언급하여 트윗을 보내주세요.
+
+새로운 기능 요청의 경우, [기능 요청 보드(Canny)](/feature-requests)에 게시물을 작성할 수 있습니다. 이는 로드맵 작성에 유용한 도구이며 GitHub 이슈보다 정렬하기 쉬운 업보트를 통해 핵심 팀에게 어떤 기능이 높은 수요를 보이는지 더 나은 지표를 제공합니다. 새로운 기능(특히 대규모 기능)에 대한 Pull Request는 자제해 주세요. 이미 누군가가 작업 중일 수 있거나 우리의 로드맵의 일부일 수 있습니다. 먼저 우리와 상의해 주세요!

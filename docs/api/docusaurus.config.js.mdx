@@ -1,0 +1,743 @@
+---
+sidebar_position: 0
+description: Docusaurus 구성 파일에 대한 API 참조입니다.
+slug: /api/docusaurus-config
+---
+
+# `docusaurus.config.js`
+
+import APITable from '@site/src/components/APITable';
+
+:::info
+
+예시는 시작하기 [**구성**](../configuration.mdx)을 참조하세요.
+
+:::
+
+## 개요 {#overview}
+
+`docusaurus.config.js`는 사이트에 대한 구성을 포함하며 사이트의 루트 디렉토리에 위치합니다.
+
+:::note
+
+[TypeScript](../typescript-support.mdx) Docusaurus 코드베이스에서는 구성 파일이 `docusaurus.config.ts`로 불릴 수 있습니다. 구문은 `js` 구성 파일과 대체로 동일하며 타입이 추가됩니다. [Docusaurus 웹사이트](https://github.com/facebook/docusaurus/blob/main/website/docusaurus.config.ts) 자체에서 예시를 볼 수 있습니다.
+
+:::
+
+이 파일은 Node.js에서 실행되며 사이트 구성 객체를 내보내거나 이를 생성하는 함수를 내보내야 합니다.
+
+`docusaurus.config.js` 파일은 다음을 지원합니다:
+
+- [**ES 모듈**](https://flaviocopes.com/es-modules/)
+- [**CommonJS**](https://flaviocopes.com/commonjs/)
+- [**TypeScript**](../typescript-support.mdx#typing-config)
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  title: 'Docusaurus',
+  url: 'https://docusaurus.io',
+  // 사이트 구성 ...
+};
+```
+
+```js title="docusaurus.config.js"
+export default async function createConfigAsync() {
+  return {
+    title: 'Docusaurus',
+    url: 'https://docusaurus.io',
+    // 사이트 구성 ...
+  };
+}
+```
+
+:::tip
+
+더 자세한 예시와 설명은 [**`docusaurus.config.js` 선언 구문**](../configuration.mdx#syntax-to-declare-docusaurus-config)을 참조하세요.
+
+:::
+
+## 필수 필드 {#required-fields}
+
+### `title` {#title}
+
+- 타입: `string`
+
+웹사이트의 제목입니다. 메타데이터와 브라우저 탭 제목으로 사용됩니다.
+
+```js title="docusaurus.config.js"
+export default {
+  title: 'Docusaurus',
+};
+```
+
+### `url` {#url}
+
+- 타입: `string`
+
+웹사이트의 URL입니다. 최상위 호스트 이름으로 간주될 수 있습니다. 예를 들어, [https://facebook.github.io](https://facebook.github.io/metro/)의 URL이고, [https://docusaurus.io](https://docusaurus.io)의 URL입니다. 이 필드는 [`baseUrl`](#baseUrl) 필드와 관련이 있습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  url: 'https://docusaurus.io',
+};
+```
+
+### `baseUrl` {#baseUrl}
+
+- 타입: `string`
+
+사이트의 기본 URL입니다. 호스트 다음의 경로로 간주될 수 있습니다. 예를 들어, `/metro/`는 https://facebook.github.io/metro/의 기본 URL입니다. 경로가 없는 URL의 경우 baseUrl을 `/`로 설정해야 합니다. 이 필드는 [`url`](#url) 필드와 관련이 있습니다. 항상 선행 및 후행 슬래시가 있습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  baseUrl: '/',
+};
+```
+
+## 선택적 필드 {#optional-fields}
+
+### `favicon` {#favicon}
+
+- 타입: `string | undefined`
+
+사이트 파비콘의 경로; 링크의 href에 사용될 수 있는 URL이어야 합니다. 예를 들어, 파비콘이 `static/img/favicon.ico`에 있는 경우:
+
+```js title="docusaurus.config.js"
+export default {
+  favicon: '/img/favicon.ico',
+};
+```
+
+### `trailingSlash` {#trailingSlash}
+
+- 타입: `boolean | undefined`
+
+URL/링크 끝의 후행 슬래시의 존재/부재를 사용자 정의하고 정적 HTML 파일의 생성 방식을 결정할 수 있습니다:
+
+- `undefined` (기본값): URL을 변경하지 않고, `/docs/myDoc.md`에 대해 `/docs/myDoc/index.html`을 생성합니다
+- `true`: URL/링크에 후행 슬래시를 추가하고, `/docs/myDoc.md`에 대해 `/docs/myDoc/index.html`을 생성합니다
+- `false`: URL/링크에서 후행 슬래시를 제거하고, `/docs/myDoc.md`에 대해 `/docs/myDoc.html`을 생성합니다
+
+:::tip
+
+각 정적 호스팅 제공업체는 정적 파일을 다르게 제공합니다 (이 동작은 시간이 지남에 따라 변경될 수 있습니다).
+
+적절한 설정을 선택하려면 [배포 가이드](../deployment.mdx)와 [slorber/trailing-slash-guide](https://github.com/slorber/trailing-slash-guide)를 참조하세요.
+
+:::
+
+### `i18n` {#i18n}
+
+- 타입: `Object`
+
+[사이트를 현지화](../i18n/i18n-introduction.mdx)하기 위한 i18n 구성 객체입니다.
+
+예시:
+
+{/* cSpell:ignore فارسی */}
+
+```js title="docusaurus.config.js"
+export default {
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fa'],
+    path: 'i18n',
+    localeConfigs: {
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+        calendar: 'gregory',
+        path: 'en',
+      },
+      fa: {
+        label: 'فارسی',
+        direction: 'rtl',
+        htmlLang: 'fa-IR',
+        calendar: 'persian',
+        path: 'fa',
+      },
+    },
+  },
+};
+```
+
+- `defaultLocale`: (1) 기본 URL에 이름이 없는 로케일 (2) `--locale` 옵션 없이 `docusaurus start`로 시작되는 로케일 (3) `<link hrefLang="x-default">` 태그에 사용될 로케일
+- `locales`: 사이트에 배포된 로케일 목록입니다. `defaultLocale`을 포함해야 합니다.
+- `path`: 모든 로케일 폴더의 기준이 되는 루트 폴더입니다. 구성 파일을 기준으로 절대 경로나 상대 경로일 수 있습니다. 기본값은 `i18n`입니다.
+- `localeConfigs`: 각 로케일에 대한 개별 옵션입니다.
+  - `label`: 로케일 드롭다운에 표시되는 이 로케일의 라벨입니다.
+  - `direction`: `ltr` (기본값) 또는 `rtl` ([오른쪽에서 왼쪽으로 쓰는 언어](https://developer.mozilla.org/en-US/docs/Glossary/rtl)인 페르시아어, 아랍어, 히브리어 등을 위한). 로케일의 CSS와 HTML 메타 속성을 선택하는 데 사용됩니다.
+  - `htmlLang`: `<html lang="...">` (또는 다른 DOM 태그 이름)과 `<link ... hreflang="...">`에서 사용할 BCP 47 언어 태그
+  - `calendar`: 날짜 시대를 계산하는 데 사용되는 [달력](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar)입니다. 실제로 표시되는 문자열을 제어하지 않습니다: `MM/DD/YYYY`와 `DD/MM/YYYY`는 모두 `gregory`입니다. 형식(`DD/MM/YYYY` 또는 `MM/DD/YYYY`)을 선택하려면 로케일 이름을 `en-GB` 또는 `en-US`로 설정하세요(`en`은 `en-US`를 의미합니다).
+  - `path`: 이 로케일의 모든 플러그인 현지화 폴더의 기준이 되는 루트 폴더입니다. `i18n.path`에 대해 해결됩니다. 기본값은 로케일의 이름입니다. 참고: 이는 로케일의 `baseUrl`에 영향을 미치지 않습니다—기본 URL 사용자 정의는 진행 중인 작업입니다.
+
+### `future` {#future}
+
+- 타입: `Object`
+
+`future` 구성 객체를 사용하면 프라임 타임에 준비되지 않은 예정된/불안정한/실험적인 Docusaurus 기능을 선택할 수 있습니다.
+
+또한 다음 주요 버전에서 예정된 중요한 변경 사항을 선택하여 이전 버전을 유지하면서 다음 버전을 대비할 수 있습니다. [Remix Future Flags 블로그 포스트](https://remix.run/blog/future-flags)는 이 아이디어를 잘 설명합니다.
+
+:::danger 마이너 버전의 중요한 변경 사항
+
+`experimental_` 또는 `unstable_`로 시작하는 기능은 **마이너 버전**에서 변경될 수 있으며, [시맨틱 버저닝 중요 변경 사항](/community/release-process)으로 간주되지 않습니다.
+
+`v<MajorVersion>_`(`v6_` `v7_` 등)로 시작하는 기능은 다음 주요 버전에서 기본적으로 켜질 것으로 예상되는 미래 플래그입니다. 이러한 기능은 변경될 가능성이 적지만, 변경 가능성을 열어두고 있습니다.
+
+`future` API의 중요한 변경 사항은 처리하기 쉬워야 하며, 마이너/메이저 버전 블로그 포스트에 문서화될 것입니다.
+
+:::
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  future: {
+    experimental_storage: {
+      type: 'localStorage',
+      namespace: true,
+    },
+    experimental_router: 'hash',
+  },
+};
+```
+
+- `experimental_storage`: 테마 작성자가 존중해야 하는 사이트 전체 브라우저 스토리지 옵션입니다.
+  - `type`: 테마 작성자가 사용해야 하는 브라우저 스토리지입니다. 가능한 값은 `localStorage`와 `sessionStorage`입니다. 기본값은 `localStorage`입니다.
+  - `namespace`: Docusaurus 사이트가 동일한 도메인이나 localhost에서 호스팅될 때 스토리지 키 충돌을 피하기 위해 브라우저 스토리지 키에 네임스페이스를 지정할지 여부입니다. 가능한 값은 `string | boolean`입니다. 네임스페이스는 스토리지 키 끝에 추가됩니다 `key-namespace`. `true`를 사용하여 사이트 `url + baseUrl`에서 자동으로 무작위 네임스페이스를 생성합니다. 기본값은 `false`입니다 (네임스페이스 없음, 기존 동작).
+- `experimental_router`: 사용할 라우터 유형입니다. 가능한 값은 `browser`와 `hash`입니다. 기본값은 `browser`입니다. `hash` 라우터는 정적 사이트 생성을 선택하지 않고 단일 `index.html` 진입점 파일로 완전히 클라이언트 측 앱을 갖고 싶은 드문 경우에만 유용합니다. 이는 Docusaurus 사이트를 [웹 서버를 실행하지 않고 로컬에서 탐색할 수 있는](https://github.com/facebook/docusaurus/issues/3825) `.zip` 아카이브로 배포하는 데 유용할 수 있습니다.
+
+### `noIndex` {#noIndex}
+
+- 타입: `boolean`
+
+이 옵션은 모든 페이지에 `<meta name="robots" content="noindex, nofollow">`를 추가하여 검색 엔진에게 사이트 색인을 피하도록 알립니다 (자세한 정보는 [여기](https://moz.com/learn/seo/robots-meta-directives)를 참조하세요).
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  noIndex: true, // 기본값은 `false`
+};
+```
+
+### `onBrokenLinks` {#onBrokenLinks}
+
+- 타입: `'ignore' | 'log' | 'warn' | 'throw'`
+
+깨진 링크를 감지했을 때 Docusaurus의 동작입니다.
+
+기본적으로 오류를 발생시켜 깨진 링크를 절대 배포하지 않도록 합니다.
+
+:::note
+
+깨진 링크 감지는 프로덕션 빌드(`docusaurus build`)에서만 사용할 수 있습니다.
+
+:::
+
+### `onBrokenAnchors` {#onBrokenAnchors}
+
+- 타입: `'ignore' | 'log' | 'warn' | 'throw'`
+
+Docusaurus의 `Heading` 컴포넌트로 선언된 깨진 앵커를 감지했을 때 Docusaurus의 동작입니다.
+
+기본적으로 경고를 출력하여 깨진 앵커를 알려줍니다.
+
+### `onBrokenMarkdownLinks` {#onBrokenMarkdownLinks}
+
+- 타입: `'ignore' | 'log' | 'warn' | 'throw'`
+
+깨진 Markdown 링크를 감지했을 때 Docusaurus의 동작입니다.
+
+기본적으로 경고를 출력하여 깨진 Markdown 링크를 알려줍니다.
+
+### `onDuplicateRoutes` {#onDuplicateRoutes}
+
+- 타입: `'ignore' | 'log' | 'warn' | 'throw'`
+
+[중복 라우트](/guides/creating-pages.mdx#duplicate-routes)를 감지했을 때 Docusaurus의 동작입니다.
+
+기본적으로 `yarn start` 또는 `yarn build`를 실행한 후 경고를 표시합니다.
+
+### `tagline` {#tagline}
+
+- 타입: `string`
+
+웹사이트의 태그라인입니다.
+
+```js title="docusaurus.config.js"
+export default {
+  tagline:
+    'Docusaurus를 사용하면 오픈 소스 문서 웹사이트를 쉽게 유지 관리할 수 있습니다.',
+};
+```
+
+### `organizationName` {#organizationName}
+
+- 타입: `string`
+
+저장소를 소유한 GitHub 사용자 또는 조직입니다. `docusaurus deploy` 명령을 사용하지 않는다면 이 필드는 필요하지 않습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  // Docusaurus의 조직은 facebook입니다
+  organizationName: 'facebook',
+};
+```
+
+### `projectName` {#projectName}
+
+- 타입: `string`
+
+GitHub 저장소의 이름입니다. `docusaurus deploy` 명령을 사용하지 않는다면 이 필드는 필요하지 않습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  projectName: 'docusaurus',
+};
+```
+
+### `deploymentBranch` {#deploymentBranch}
+
+- 타입: `string`
+
+정적 파일을 배포할 브랜치의 이름입니다. `docusaurus deploy` 명령을 사용하지 않는다면 이 필드는 필요하지 않습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  deploymentBranch: 'gh-pages',
+};
+```
+
+### `githubHost` {#githubHost}
+
+- 타입: `string`
+
+서버의 호스트 이름입니다. GitHub Enterprise를 사용하는 경우 유용합니다. `docusaurus deploy` 명령을 사용하지 않는다면 이 필드는 필요하지 않습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  githubHost: 'github.com',
+};
+```
+
+### `githubPort` {#githubPort}
+
+- 타입: `string`
+
+서버의 포트입니다. GitHub Enterprise를 사용하는 경우 유용합니다. `docusaurus deploy` 명령을 사용하지 않는다면 이 필드는 필요하지 않습니다.
+
+```js title="docusaurus.config.js"
+export default {
+  githubPort: '22',
+};
+```
+
+### `themeConfig` {#themeConfig}
+
+- 타입: `Object`
+
+네비게이션 바와 푸터와 같은 사이트 UI를 사용자 정의하기 위한 [테마 구성](./themes/theme-configuration.mdx) 객체입니다.
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  themeConfig: {
+    docs: {
+      sidebar: {
+        hideable: false,
+        autoCollapseCategories: false,
+      },
+    },
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
+    navbar: {
+      title: '사이트 제목',
+      logo: {
+        alt: '사이트 로고',
+        src: 'img/logo.svg',
+        width: 32,
+        height: 32,
+      },
+      items: [
+        {
+          to: 'docs/docusaurus.config.js',
+          activeBasePath: 'docs',
+          label: 'docusaurus.config.js',
+          position: 'left',
+        },
+        // ... 다른 링크
+      ],
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          title: '문서',
+          items: [
+            {
+              label: '문서',
+              to: 'docs/doc1',
+            },
+          ],
+        },
+        // ... 다른 링크
+      ],
+      logo: {
+        alt: 'Meta 오픈 소스 로고',
+        src: 'img/meta_oss_logo.png',
+        href: 'https://opensource.fb.com',
+        width: 160,
+        height: 51,
+      },
+      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`, // 여기에 자체 HTML을 넣을 수도 있습니다
+    },
+  },
+};
+```
+
+### `plugins` {#plugins}
+
+- 타입: `PluginConfig[]`
+
+```ts
+type PluginConfig = string | [string, any] | PluginModule | [PluginModule, any];
+```
+
+`PluginModule`의 형태는 [플러그인 메소드 참조](./plugin-methods/README.mdx)를 참조하세요.
+
+```js title="docusaurus.config.js"
+export default {
+  plugins: [
+    'docusaurus-plugin-awesome',
+    ['docusuarus-plugin-confetti', {fancy: false}],
+    () => ({
+      postBuild() {
+        console.log('빌드 완료');
+      },
+    }),
+  ],
+};
+```
+
+### `themes` {#themes}
+
+- 타입: `PluginConfig[]`
+
+```js title="docusaurus.config.js"
+export default {
+  themes: ['@docusaurus/theme-classic'],
+};
+```
+
+### `presets` {#presets}
+
+- 타입: `PresetConfig[]`
+
+```ts
+type PresetConfig = string | [string, any];
+```
+
+```js title="docusaurus.config.js"
+export default {
+  presets: [],
+};
+```
+
+### `markdown` {#markdown}
+
+전역 Docusaurus Markdown 구성입니다.
+
+- 타입: `MarkdownConfig`
+
+```ts
+type MarkdownPreprocessor = (args: {
+  filePath: string;
+  fileContent: string;
+}) => string;
+
+type MDX1CompatOptions =
+  | boolean
+  | {
+      comments: boolean;
+      admonitions: boolean;
+      headingIds: boolean;
+    };
+
+export type ParseFrontMatter = (params: {
+  filePath: string;
+  fileContent: string;
+  defaultParseFrontMatter: ParseFrontMatter;
+}) => Promise<{
+  frontMatter: {[key: string]: unknown};
+  content: string;
+}>;
+
+type MarkdownAnchorsConfig = {
+  maintainCase: boolean;
+};
+
+type MarkdownConfig = {
+  format: 'mdx' | 'md' | 'detect';
+  mermaid: boolean;
+  preprocessor?: MarkdownPreprocessor;
+  parseFrontMatter?: ParseFrontMatter;
+  mdx1Compat: MDX1CompatOptions;
+  remarkRehypeOptions: object; // https://github.com/remarkjs/remark-rehype#options 참조
+  anchors: MarkdownAnchorsConfig;
+};
+```
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  markdown: {
+    format: 'mdx',
+    mermaid: true,
+    preprocessor: ({filePath, fileContent}) => {
+      return fileContent.replaceAll('{{MY_VAR}}', 'MY_VALUE');
+    },
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      result.frontMatter.description =
+        result.frontMatter.description?.replaceAll('{{MY_VAR}}', 'MY_VALUE');
+      return result;
+    },
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
+    anchors: {
+      maintainCase: true,
+    },
+  },
+};
+```
+
+```mdx-code-block
+<APITable>
+```
+
+| 이름 | 타입 | 기본값 | 설명 |
+| --- | --- | --- | --- |
+| `format` | `'mdx' \| 'md' \| 'detect'` | `'mdx'` | Markdown 콘텐츠에 사용할 기본 파서 형식입니다. 'detect'를 사용하면 파일 확장자(`.md` vs `.mdx`)에 따라 적절한 형식을 자동으로 선택합니다. |
+| `mermaid` | `boolean` | `false` | `true`일 때, Docusaurus가 `mermaid` 언어로 된 Markdown 코드 블록을 Mermaid 다이어그램으로 렌더링할 수 있게 합니다. |
+| `preprocessor` | `MarkdownPreprocessor` | `undefined` | 파싱 전에 Markdown 콘텐츠 문자열을 변경할 수 있는 기능을 제공합니다. 최후의 수단 또는 임시 방편으로 사용하세요: Remark/Rehype 플러그인을 구현하는 것이 거의 항상 더 좋습니다. |
+| `parseFrontMatter` | `ParseFrontMatter` | `undefined` | 자체 프론트매터 파서를 제공하거나 기본 파서를 강화할 수 있는 기능을 제공합니다. 자세한 내용은 [프론트매터 가이드](../guides/markdown-features/markdown-features-intro.mdx#front-matter)를 참조하세요. |
+| `mdx1Compat` | `MDX1CompatOptions` | `{comments: true, admonitions: true, headingIds: true}` | Docusaurus v3+로 쉽게 업그레이드할 수 있도록 하는 호환성 옵션입니다. |
+| `anchors` | `MarkdownAnchorsConfig` | `{maintainCase: false}` | Markdown 제목에서 생성된 앵커의 동작을 제어하는 옵션입니다 |
+| `remarkRehypeOptions` | `object` | `undefined` | 사용자 정의 [`remark-rehype` 옵션](https://github.com/remarkjs/remark-rehype#options)을 전달할 수 있게 합니다. |
+
+```mdx-code-block
+</APITable>
+```
+
+### `customFields` {#customFields}
+
+Docusaurus는 `docusaurus.config.js`를 알 수 없는 필드로부터 보호합니다. 사용자 정의 필드를 추가하려면 `customFields`에 정의하세요.
+
+- 타입: `Object`
+
+```js title="docusaurus.config.js"
+export default {
+  customFields: {
+    admin: 'endi',
+    superman: 'lol',
+  },
+};
+```
+
+구성에 알 수 없는 필드를 추가하려고 하면 빌드 중에 오류가 발생합니다:
+
+```bash
+오류: docusaurus.config.js의 'foo', 'bar' 필드는 인식되지 않습니다
+```
+
+### `staticDirectories` {#staticDirectories}
+
+사이트 디렉토리를 기준으로 한 상대 경로 또는 절대 경로의 배열입니다. 이 경로 아래의 파일은 그대로 빌드 출력으로 복사됩니다.
+
+- 타입: `string[]`
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  staticDirectories: ['static'],
+};
+```
+
+### `headTags` {#headTags}
+
+HTML `<head>`에 삽입될 태그의 배열입니다. 값은 두 가지 속성을 포함하는 객체여야 합니다; `tagName`과 `attributes`. `tagName`은 생성될 태그를 결정하는 문자열이어야 합니다 (예: `"link"`). `attributes`는 속성-값 맵이어야 합니다.
+
+- 타입: `{ tagName: string; attributes: Object; }[]`
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        href: '/img/docusaurus.png',
+      },
+    },
+  ],
+};
+```
+
+이는 생성된 HTML에서 `<link rel="icon" href="img/docusaurus.png" />`가 됩니다.
+
+### `scripts` {#scripts}
+
+로드할 스크립트의 배열입니다. 값은 문자열이거나 속성-값 맵의 일반 객체일 수 있습니다. `<script>` 태그는 HTML `<head>`에 삽입됩니다. 일반 객체를 사용하는 경우 유일한 필수 속성은 `src`이며, 다른 속성은 모두 허용됩니다 (각 속성은 부울/문자열 값을 가져야 합니다).
+
+여기에 추가된 `<script>`는 렌더링을 차단하므로 객체에 `async: true`/`defer: true`를 추가하는 것이 좋을 수 있습니다.
+
+- 타입: `(string | Object)[]`
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  scripts: [
+    // 문자열 형식
+    'https://docusaurus.io/script.js',
+    // 객체 형식
+    {
+      src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
+      async: true,
+    },
+  ],
+};
+```
+
+### `stylesheets` {#stylesheets}
+
+로드할 CSS 소스의 배열입니다. 값은 문자열이거나 속성-값 맵의 일반 객체일 수 있습니다. `<link>` 태그는 HTML `<head>`에 삽입됩니다. 객체를 사용하는 경우 유일한 필수 속성은 `href`이며, 다른 속성은 모두 허용됩니다 (각 속성은 부울/문자열 값을 가져야 합니다).
+
+- 타입: `(string | Object)[]`
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  stylesheets: [
+    // 문자열 형식
+    'https://docusaurus.io/style.css',
+    // 객체 형식
+    {
+      href: 'http://mydomain.com/style.css',
+    },
+  ],
+};
+```
+
+:::info
+
+기본적으로 `<link>` 태그는 `rel="stylesheet"`를 가지지만, 사용자 정의 `rel` 값을 명시적으로 추가하여 반드시 스타일시트가 아닌 모든 종류의 `<link>` 태그를 주입할 수 있습니다.
+
+:::
+
+### `clientModules` {#clientModules}
+
+사이트에서 전역적으로 로드할 [클라이언트 모듈](../advanced/client.mdx#client-modules)의 배열입니다.
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  clientModules: ['./mySiteGlobalJs.js', './mySiteGlobalCss.css'],
+};
+```
+
+### `ssrTemplate` {#ssrTemplate}
+
+애플리케이션을 렌더링하는 데 사용될 [Eta의 구문](https://eta.js.org/docs/syntax#syntax-overview)으로 작성된 HTML 템플릿입니다. 이를 사용하여 `body` 태그에 사용자 정의 속성을 설정하거나, 추가 `meta` 태그를 설정하거나, `viewport`를 사용자 정의하는 등의 작업을 할 수 있습니다. Docusaurus가 제대로 작동하려면 템플릿이 올바르게 구조화되어 있어야 한다는 점에 유의하세요. 일단 사용자 정의하면 템플릿이 상위 요구 사항을 준수하는지 확인해야 합니다.
+
+- 타입: `string`
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  ssrTemplate: `<!DOCTYPE html>
+<html <%~ it.htmlAttributes %>>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="Docusaurus v<%= it.version %>">
+    <% it.metaAttributes.forEach((metaAttribute) => { %>
+      <%~ metaAttribute %>
+    <% }); %>
+    <%~ it.headTags %>
+    <% it.stylesheets.forEach((stylesheet) => { %>
+      <link rel="stylesheet" href="<%= it.baseUrl %><%= stylesheet %>" />
+    <% }); %>
+    <% it.scripts.forEach((script) => { %>
+      <link rel="preload" href="<%= it.baseUrl %><%= script %>" as="script">
+    <% }); %>
+  </head>
+  <body <%~ it.bodyAttributes %>>
+    <%~ it.preBodyTags %>
+    <div id="__docusaurus">
+      <%~ it.appHtml %>
+    </div>
+    <% it.scripts.forEach((script) => { %>
+      <script src="<%= it.baseUrl %><%= script %>"></script>
+    <% }); %>
+    <%~ it.postBodyTags %>
+  </body>
+</html>`,
+};
+```
+
+### `titleDelimiter` {#titleDelimiter}
+
+- 타입: `string`
+
+생성된 `<title>` 태그에서 제목 구분자로 사용됩니다.
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  titleDelimiter: '🦖', // 기본값은 `|`
+};
+```
+
+### `baseUrlIssueBanner` {#baseUrlIssueBanner}
+
+- 타입: `boolean`
+
+활성화되면 사이트가 CSS나 JavaScript 파일을 로드할 수 없는 경우 배너를 표시합니다. 이는 매우 일반적인 문제로, 종종 사이트 구성의 잘못된 `baseUrl`과 관련이 있습니다.
+
+예시:
+
+```js title="docusaurus.config.js"
+export default {
+  baseUrlIssueBanner: true, // 기본값은 `true`
+};
+```
+
+![잘못된 기본 URL 문제 배너 샘플. 스타일시트가 로드되지 않아 스타일이 매우 기본적입니다. 텍스트는 "Docusaurus 사이트가 제대로 로드되지 않았습니다... 현재 구성된 baseUrl = / (기본값); baseUrl = /build/를 시도해 보는 것이 좋습니다"라고 말합니다](/img/baseUrlIssueBanner.png)
+
+:::warning
+
+이 배너는 잘못된 기본 URL로 인해 모든 자산 로딩이 실패할 경우를 대비하여 인라인 CSS / JS를 사용해야 합니다.
+
+엄격한 [콘텐츠 보안 정책](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)이 있다면 이를 비활성화하는 것이 좋습니다.
+
+:::
