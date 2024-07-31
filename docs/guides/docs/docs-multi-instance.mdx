@@ -1,67 +1,67 @@
 ---
 id: multi-instance
-description: Use multiple docs plugin instances on a single Docusaurus site.
+description: 단일 Docusaurus 사이트에서 여러 개의 docs 플러그인 인스턴스를 사용합니다.
 slug: /docs-multi-instance
 ---
 
-# Docs Multi-instance
+# Docs 멀티 인스턴스
 
-The `@docusaurus/plugin-content-docs` plugin can support [multi-instance](../../using-plugins.mdx#multi-instance-plugins-and-plugin-ids).
+`@docusaurus/plugin-content-docs` 플러그인은 [멀티 인스턴스](../../using-plugins.mdx#multi-instance-plugins-and-plugin-ids)를 지원할 수 있습니다.
 
 :::note
 
-This feature is only useful for [versioned documentation](./versioning.mdx). It is recommended to be familiar with docs versioning before reading this page. If you just want [multiple sidebars](./sidebar/multiple-sidebars.mdx), you can do so within one plugin.
+이 기능은 [버전 관리 문서](./versioning.mdx)에만 유용합니다. 이 페이지를 읽기 전에 docs 버전 관리에 대해 잘 알고 있어야 합니다. [여러 사이드바](./sidebar/multiple-sidebars.mdx)만 원하는 경우 하나의 플러그인 내에서 그렇게 할 수 있습니다.
 
 :::
 
-## Use-cases {#use-cases}
+## 사용 사례 {#use-cases}
 
-Sometimes you want a Docusaurus site to host 2 distinct sets of documentation (or more).
+때로는 Docusaurus 사이트에서 2개의 구별된 문서 세트(또는 그 이상)를 호스팅하고 싶을 수 있습니다.
 
-These documentations may even have different versioning/release lifecycles.
+이러한 문서들은 서로 다른 버전 관리/릴리스 주기를 가질 수도 있습니다.
 
-### Mobile SDKs documentation {#mobile-sdks-documentation}
+### 모바일 SDK 문서 {#mobile-sdks-documentation}
 
-If you build a cross-platform mobile SDK, you may have 2 documentations:
+크로스 플랫폼 모바일 SDK를 만드는 경우, 2개의 문서가 있을 수 있습니다:
 
-- Android SDK documentation (`v1.0`, `v1.1`)
-- iOS SDK documentation (`v1.0`, `v2.0`)
+- Android SDK 문서 (`v1.0`, `v1.1`)
+- iOS SDK 문서 (`v1.0`, `v2.0`)
 
-In this case, you can use a distinct docs plugin instance per mobile SDK documentation.
+이 경우, 모바일 SDK 문서마다 별도의 docs 플러그인 인스턴스를 사용할 수 있습니다.
 
 :::warning
 
-If each documentation instance is very large, you should rather create 2 distinct Docusaurus sites.
+각 문서 인스턴스가 매우 크다면, 2개의 구별된 Docusaurus 사이트를 만드는 것이 좋습니다.
 
-If someone edits the iOS documentation, is it really useful to rebuild everything, including the whole Android documentation that did not change?
+누군가 iOS 문서를 편집한 경우, 변경되지 않은 전체 Android 문서를 포함하여 모든 것을 다시 빌드하는 것이 정말 유용할까요?
 
 :::
 
-### Versioned and unversioned doc {#versioned-and-unversioned-doc}
+### 버전 관리 및 버전 미관리 문서 {#versioned-and-unversioned-doc}
 
-Sometimes, you want some documents to be versioned, while other documents are more "global", and it feels useless to version them.
+때로는 일부 문서는 버전 관리를 하고 싶지만, 다른 문서들은 더 "전역적"이어서 버전 관리가 불필요하다고 느낄 수 있습니다.
 
-We use this pattern on the Docusaurus website itself:
+우리는 Docusaurus 웹사이트 자체에서 이 패턴을 사용합니다:
 
-- The [/docs/\*](/docs) section is versioned
-- The [/community/\*](/community/support) section is unversioned
+- [/docs/\*](/docs) 섹션은 버전 관리됩니다
+- [/community/\*](/community/support) 섹션은 버전 관리되지 않습니다
 
-## Setup {#setup}
+## 설정 {#setup}
 
-Suppose you have 2 documentations:
+2개의 문서가 있다고 가정해 봅시다:
 
-- Product: some versioned doc about your product
-- Community: some unversioned doc about the community around your product
+- Product: 제품에 대한 버전 관리된 문서
+- Community: 제품을 둘러싼 커뮤니티에 대한 버전 미관리 문서
 
-In this case, you should use the same plugin twice in your site configuration.
+이 경우, 사이트 구성에서 동일한 플러그인을 두 번 사용해야 합니다.
 
 :::warning
 
-`@docusaurus/preset-classic` already includes a docs plugin instance for you!
+`@docusaurus/preset-classic`은 이미 docs 플러그인 인스턴스를 포함하고 있습니다!
 
 :::
 
-When using the preset:
+프리셋을 사용할 때:
 
 ```js title="docusaurus.config.js"
 export default {
@@ -71,12 +71,12 @@ export default {
       {
         docs: {
           // highlight-start
-          // id: 'product', // omitted => default instance
+          // id: 'product', // 생략됨 => 기본 인스턴스
           // highlight-end
           path: 'product',
           routeBasePath: 'product',
           sidebarPath: './sidebarsProduct.js',
-          // ... other options
+          // ... 기타 옵션
         },
       },
     ],
@@ -91,14 +91,14 @@ export default {
         path: 'community',
         routeBasePath: 'community',
         sidebarPath: './sidebarsCommunity.js',
-        // ... other options
+        // ... 기타 옵션
       },
     ],
   ],
 };
 ```
 
-When not using the preset:
+프리셋을 사용하지 않을 때:
 
 ```js title="docusaurus.config.js"
 export default {
@@ -107,12 +107,12 @@ export default {
       '@docusaurus/plugin-content-docs',
       {
         // highlight-start
-        // id: 'product', // omitted => default instance
+        // id: 'product', // 생략됨 => 기본 인스턴스
         // highlight-end
         path: 'product',
         routeBasePath: 'product',
         sidebarPath: './sidebarsProduct.js',
-        // ... other options
+        // ... 기타 옵션
       },
     ],
     [
@@ -124,32 +124,32 @@ export default {
         path: 'community',
         routeBasePath: 'community',
         sidebarPath: './sidebarsCommunity.js',
-        // ... other options
+        // ... 기타 옵션
       },
     ],
   ],
 };
 ```
 
-Don't forget to assign a unique `id` attribute to plugin instances.
+플러그인 인스턴스에 고유한 `id` 속성을 할당하는 것을 잊지 마세요.
 
 :::note
 
-We consider that the `product` instance is the most important one, and make it the "default" instance by not assigning any ID.
+우리는 `product` 인스턴스가 가장 중요하다고 간주하고, ID를 할당하지 않음으로써 "기본" 인스턴스로 만듭니다.
 
 :::
 
-## Versioned paths {#versioned-paths}
+## 버전 관리된 경로 {#versioned-paths}
 
-Each plugin instance will store versioned docs in a distinct folder.
+각 플러그인 인스턴스는 버전 관리된 docs를 별도의 폴더에 저장합니다.
 
-The default plugin instance will use these paths:
+기본 플러그인 인스턴스는 다음 경로를 사용합니다:
 
 - `website/versions.json`
 - `website/versioned_docs`
 - `website/versioned_sidebars`
 
-The other plugin instances (with an `id` attribute) will use these paths:
+다른 플러그인 인스턴스(`id` 속성이 있는)는 다음 경로를 사용합니다:
 
 - `website/[pluginId]_versions.json`
 - `website/[pluginId]_versioned_docs`
@@ -157,37 +157,37 @@ The other plugin instances (with an `id` attribute) will use these paths:
 
 :::tip
 
-You can omit the `id` attribute (defaults to `default`) for one of the docs plugin instances.
+docs 플러그인 인스턴스 중 하나에 대해 `id` 속성을 생략할 수 있습니다(기본값은 `default`).
 
-The instance paths will be simpler, and retro-compatible with a single-instance setup.
+인스턴스 경로가 더 간단해지고, 단일 인스턴스 설정과 역호환성을 유지할 수 있습니다.
 
 :::
 
-## Tagging new versions {#tagging-new-versions}
+## 새 버전 태그 지정 {#tagging-new-versions}
 
-Each plugin instance will have its own CLI command to tag a new version. They will be displayed if you run:
+각 플러그인 인스턴스는 새 버전에 태그를 지정하는 자체 CLI 명령을 가집니다. 다음을 실행하면 표시됩니다:
 
 ```bash npm2yarn
 npm run docusaurus -- --help
 ```
 
-To version the product/default docs plugin instance:
+product/기본 docs 플러그인 인스턴스의 버전을 지정하려면:
 
 ```bash npm2yarn
 npm run docusaurus docs:version 1.0.0
 ```
 
-To version the non-default/community docs plugin instance:
+비기본/community docs 플러그인 인스턴스의 버전을 지정하려면:
 
 ```bash npm2yarn
 npm run docusaurus docs:version:community 1.0.0
 ```
 
-## Docs navbar items {#docs-navbar-items}
+## Docs 네비게이션 바 항목 {#docs-navbar-items}
 
-Each docs-related [theme navbar items](../../api/themes/theme-configuration.mdx#navbar) take an optional `docsPluginId` attribute.
+각 docs 관련 [테마 네비게이션 바 항목](../../api/themes/theme-configuration.mdx#navbar)은 선택적 `docsPluginId` 속성을 받습니다.
 
-For example, if you want to have one version dropdown for each mobile SDK (iOS and Android), you could do:
+예를 들어, 각 모바일 SDK(iOS 및 Android)에 대해 하나의 버전 드롭다운을 갖고 싶다면 다음과 같이 할 수 있습니다:
 
 ```js title="docusaurus.config.js"
 export default {

@@ -66,7 +66,7 @@ const sidebars: SidebarsConfig = {
         'blog',
         {
           type: 'category',
-          label: 'Markdown Features',
+          label: 'Markdown 기능',
           link: {
             type: 'doc',
             id: 'guides/markdown-features/introduction',

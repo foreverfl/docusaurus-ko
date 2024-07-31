@@ -1,10 +1,10 @@
 ---
 id: tabs
-description: Using tabs inside Docusaurus Markdown
+description: Docusaurus Markdown 내에서 탭 사용하기
 slug: /markdown-features/tabs
 ---
 
-# Tabs
+# 탭
 
 ```mdx-code-block
 import BrowserWindow from '@site/src/components/BrowserWindow';
@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 import styles from './markdown-features-tabs-styles.module.css';
 ```
 
-Docusaurus provides the `<Tabs>` component that you can use in Markdown thanks to [MDX](./markdown-features-react.mdx):
+Docusaurus는 [MDX](./markdown-features-react.mdx) 덕분에 Markdown에서 사용할 수 있는 `<Tabs>` 컴포넌트를 제공합니다:
 
 {/* prettier-ignore */}
 ```jsx
@@ -45,7 +45,7 @@ import TabItem from '@theme/TabItem';
 
 ---
 
-It is also possible to provide `values` and `defaultValue` props to `Tabs`:
+`Tabs`에 `values`와 `defaultValue` props를 제공하는 것도 가능합니다:
 
 ```jsx
 <Tabs
@@ -78,7 +78,7 @@ It is also possible to provide `values` and `defaultValue` props to `Tabs`:
 ```
 
 <details>
-  <summary><code>Tabs</code> props take precedence over the <code>TabItem</code> props:</summary>
+  <summary><code>Tabs</code> props가 <code>TabItem</code> props보다 우선순위가 높습니다:</summary>
 
 ```jsx
 <Tabs
@@ -120,21 +120,21 @@ It is also possible to provide `values` and `defaultValue` props to `Tabs`:
 
 :::tip
 
-By default, all tabs are rendered eagerly during the build process, and search engines can index hidden tabs.
+기본적으로 모든 탭은 빌드 프로세스 중에 즉시 렌더링되며, 검색 엔진은 숨겨진 탭을 인덱싱할 수 있습니다.
 
-It is possible to only render the default tab with `<Tabs lazy />`.
+`<Tabs lazy />` 를 사용하여 기본 탭만 렌더링하는 것도 가능합니다.
 
 :::
 
-## Displaying a default tab {#displaying-a-default-tab}
+## 기본 탭 표시하기 {#displaying-a-default-tab}
 
-The first tab is displayed by default, and to override this behavior, you can specify a default tab by adding `default` to one of the tab items. You can also set the `defaultValue` prop of the `Tabs` component to the label value of your choice. For example, in the example above, either setting `default` for the `value="apple"` tab or setting `defaultValue="apple"` for the tabs forces the "Apple" tab to be open by default.
+기본적으로 첫 번째 탭이 표시되며, 이 동작을 재정의하려면 탭 항목 중 하나에 `default`를 추가하여 기본 탭을 지정할 수 있습니다. 또한 `Tabs` 컴포넌트의 `defaultValue` prop을 원하는 레이블 값으로 설정할 수 있습니다. 예를 들어, 위의 예시에서 `value="apple"` 탭에 `default`를 설정하거나 탭에 `defaultValue="apple"`을 설정하면 "Apple" 탭이 기본적으로 열리도록 강제할 수 있습니다.
 
-Docusaurus will throw an error if a `defaultValue` is provided for the `Tabs` but it refers to a non-existing value. If you want none of the tabs to be shown by default, use `defaultValue={null}`.
+`Tabs`에 `defaultValue`가 제공되었지만 존재하지 않는 값을 참조하는 경우 Docusaurus는 오류를 발생시킵니다. 기본적으로 탭을 표시하지 않으려면 `defaultValue={null}`을 사용하세요.
 
-## Syncing tab choices {#syncing-tab-choices}
+## 탭 선택 동기화하기 {#syncing-tab-choices}
 
-You may want choices of the same kind of tabs to sync with each other. For example, you might want to provide different instructions for users on Windows vs users on macOS, and you want to change all OS-specific instructions tabs in one click. To achieve that, you can give all related tabs the same `groupId` prop. Note that doing this will persist the choice in `localStorage` and all `<Tab>` instances with the same `groupId` will update automatically when the value of one of them is changed. Note that group IDs are globally namespaced.
+동일한 종류의 탭 선택을 서로 동기화하고 싶을 수 있습니다. 예를 들어, Windows 사용자와 macOS 사용자에게 다른 지침을 제공하고 한 번의 클릭으로 모든 OS별 지침 탭을 변경하고 싶을 수 있습니다. 이를 위해 모든 관련 탭에 동일한 `groupId` prop을 지정할 수 있습니다. 이렇게 하면 선택이 `localStorage`에 유지되며 동일한 `groupId`를 가진 모든 `<Tab>` 인스턴스는 그 중 하나의 값이 변경될 때 자동으로 업데이트됩니다. 그룹 ID는 전역적으로 네임스페이스화되어 있습니다.
 
 ```jsx
 // highlight-next-line
@@ -164,7 +164,7 @@ You may want choices of the same kind of tabs to sync with each other. For examp
 </BrowserWindow>
 ```
 
-For all tab groups that have the same `groupId`, the possible values do not need to be the same. If one tab group is chosen a value that does not exist in another tab group with the same `groupId`, the tab group with the missing value won't change its tab. You can see that from the following example. Try to select Linux, and the above tab groups don't change.
+동일한 `groupId`를 가진 모든 탭 그룹에 대해 가능한 값이 반드시 동일할 필요는 없습니다. 한 탭 그룹에서 동일한 `groupId`를 가진 다른 탭 그룹에 존재하지 않는 값을 선택한 경우, 누락된 값을 가진 탭 그룹은 탭을 변경하지 않습니다. 다음 예시에서 이를 확인할 수 있습니다. Linux를 선택해보세요, 위의 탭 그룹은 변경되지 않습니다.
 
 ```jsx
 <Tabs groupId="operating-systems">
@@ -192,7 +192,7 @@ For all tab groups that have the same `groupId`, the possible values do not need
 
 ---
 
-Tab choices with different group IDs will not interfere with each other:
+다른 그룹 ID를 가진 탭 선택은 서로 간섭하지 않습니다:
 
 ```jsx
 // highlight-next-line
@@ -222,9 +222,9 @@ Tab choices with different group IDs will not interfere with each other:
 </BrowserWindow>
 ```
 
-## Customizing tabs {#customizing-tabs}
+## 탭 사용자 정의하기 {#customizing-tabs}
 
-You might want to customize the appearance of a certain set of tabs. You can pass the string in `className` prop, and the specified CSS class will be added to the `Tabs` component:
+특정 탭 세트의 모양을 사용자 정의하고 싶을 수 있습니다. `className` prop에 문자열을 전달할 수 있으며, 지정된 CSS 클래스가 `Tabs` 컴포넌트에 추가됩니다:
 
 ```jsx
 // highlight-next-line
@@ -245,9 +245,9 @@ You might want to customize the appearance of a certain set of tabs. You can pas
 </BrowserWindow>
 ```
 
-### Customizing tab headings {#customizing-tab-headings}
+### 탭 제목 사용자 정의하기 {#customizing-tab-headings}
 
-You can also customize each tab heading independently by using the `attributes` field. The extra props can be passed to the headings either through the `values` prop in `Tabs`, or props of each `TabItem`—in the same way as you declare `label`.
+또한 `attributes` 필드를 사용하여 각 탭 제목을 독립적으로 사용자 정의할 수 있습니다. 추가 props는 `Tabs`의 `values` prop을 통해 또는 각 `TabItem`의 props를 통해 제목에 전달될 수 있습니다 - `label`을 선언하는 것과 동일한 방식입니다.
 
 {/* prettier-ignore */}
 ```jsx title="some-doc.mdx"
@@ -307,7 +307,7 @@ import styles from './styles.module.css';
 
 :::tip
 
-`className` would be merged with other default class names. You may also use a custom `data-value` field (`{'data-value': 'apple'}`) paired with CSS attribute selectors:
+`className`은 다른 기본 클래스 이름과 병합됩니다. 또한 사용자 정의 `data-value` 필드(`{'data-value': 'apple'}`)를 CSS 속성 선택자와 함께 사용할 수 있습니다:
 
 ```css title="styles.module.css"
 li[role='tab'][data-value='apple'] {
@@ -317,11 +317,11 @@ li[role='tab'][data-value='apple'] {
 
 :::
 
-## Query string {#query-string}
+## 쿼리 문자열 {#query-string}
 
-It is possible to persist the selected tab into the url search parameters. This enables you to share a link to a page which pre-selects the tab - linking from your Android app to documentation with the Android tabs pre-selected. This feature does not provide an anchor link - the browser will not scroll to the tab.
+선택된 탭을 URL 검색 매개변수에 유지하는 것이 가능합니다. 이를 통해 페이지 링크를 공유하면서 특정 탭이 미리 선택되도록 할 수 있습니다. 예를 들어, Android 앱에서 Android 탭이 미리 선택된 문서로 링크할 수 있습니다. 이 기능은 앵커 링크를 제공하지 않으므로, 브라우저가 자동으로 해당 탭으로 스크롤하지는 않습니다.
 
-Use the `queryString` prop to enable this feature and define the search param name to use.
+이 기능을 활성화하고 사용할 검색 매개변수 이름을 정의하려면 `queryString` prop을 사용하세요.
 
 ```tsx
 // highlight-next-line
@@ -344,13 +344,13 @@ Use the `queryString` prop to enable this feature and define the search param na
 </BrowserWindow>
 ```
 
-As soon as a tab is clicked, a search parameter is added at the end of the url: `?current-os=android` or `?current-os=ios`.
+탭을 클릭하자마자 URL 끝에 검색 매개변수가 추가됩니다: `?current-os=android` 또는 `?current-os=ios`.
 
 :::tip
 
-`queryString` can be used together with `groupId`.
+`queryString`은 `groupId`와 함께 사용할 수 있습니다.
 
-For convenience, when the `queryString` prop is `true`, the `groupId` value will be used as a fallback.
+편의를 위해 `queryString` prop이 `true`일 때, `groupId` 값이 대체로 사용됩니다.
 
 ```tsx
 // highlight-next-line
@@ -373,6 +373,6 @@ For convenience, when the `queryString` prop is `true`, the `groupId` value will
 </BrowserWindow>
 ```
 
-When the page loads, the tab query string choice will be restored in priority over the `groupId` choice (using `localStorage`).
+페이지가 로드될 때, 탭 쿼리 문자열 선택이 `groupId` 선택(`localStorage` 사용)보다 우선적으로 복원됩니다.
 
 :::
