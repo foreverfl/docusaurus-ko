@@ -3,98 +3,98 @@ id: introduction
 slug: /i18n/introduction
 ---
 
-# i18n - Introduction
+# i18n - 소개
 
-It is **easy to translate a Docusaurus website** with its internationalization ([i18n](https://en.wikipedia.org/wiki/Internationalization_and_localization)) support.
+Docusaurus 웹사이트는 국제화([i18n](https://en.wikipedia.org/wiki/Internationalization_and_localization)) 지원으로 **쉽게 번역**할 수 있습니다.
 
-## Goals {#goals}
+## 목표 {#goals}
 
-It is important to understand the **design decisions** behind the Docusaurus i18n support.
+Docusaurus i18n 지원 뒤의 **설계 결정**을 이해하는 것이 중요합니다.
 
-For more context, you can read the initial [RFC](https://github.com/facebook/docusaurus/issues/3317) and [PR](https://github.com/facebook/docusaurus/pull/3325).
+더 자세한 맥락을 알고 싶다면 초기 [RFC](https://github.com/facebook/docusaurus/issues/3317)와 [PR](https://github.com/facebook/docusaurus/pull/3325)을 읽어보세요.
 
-### i18n goals {#i18n-goals}
+### i18n 목표 {#i18n-goals}
 
-The goals of the Docusaurus i18n system are:
+Docusaurus i18n 시스템의 목표는 다음과 같습니다:
 
-- **Simple**: just put the translated files in the correct filesystem location
-- **Flexible translation workflows**: use Git (monorepo, forks, or submodules), SaaS software, FTP
-- **Flexible deployment options**: single, multiple domains, or hybrid
-- **Modular**: allow plugin authors to provide i18n support
-- **Low-overhead runtime**: documentation is mostly static and does not require heavy JS libraries or polyfills
-- **Scalable build-times**: allow building and deploying localized sites independently
-- **Localize assets**: an image of your site might contain text that should be translated
-- **No coupling**: not forced to use any SaaS, yet integrations are possible
-- **Easy to use with [Crowdin](https://crowdin.com/)**: a lot of Docusaurus v1 sites use Crowdin and should be able to migrate to v2
-- **Good SEO defaults**: we set useful SEO headers like [`hreflang`](https://developers.google.com/search/docs/advanced/crawling/localized-versions) for you
-- **RTL support**: locales reading right-to-left (Arabic, Hebrew, etc.) are supported and easy to implement
-- **Default translations**: classic theme labels are translated for you in [many languages](https://github.com/facebook/docusaurus/tree/main/packages/docusaurus-theme-translations/locales)
+- **간단함**: 번역된 파일을 올바른 파일 시스템 위치에 넣기만 하면 됩니다
+- **유연한 번역 워크플로우**: Git(모노레포, 포크 또는 서브모듈), SaaS 소프트웨어, FTP 사용
+- **유연한 배포 옵션**: 단일, 다중 도메인 또는 하이브리드
+- **모듈식**: 플러그인 작성자가 i18n 지원을 제공할 수 있도록 함
+- **낮은 오버헤드 런타임**: 문서는 대부분 정적이며 무거운 JS 라이브러리나 폴리필이 필요하지 않음
+- **확장 가능한 빌드 시간**: 현지화된 사이트를 독립적으로 빌드하고 배포할 수 있음
+- **자산 현지화**: 사이트의 이미지에 번역해야 할 텍스트가 포함될 수 있음
+- **커플링 없음**: SaaS 사용을 강요하지 않지만 통합은 가능함
+- **[Crowdin](https://crowdin.com/)과 함께 사용하기 쉬움**: 많은 Docusaurus v1 사이트가 Crowdin을 사용하고 있으며 v2로 마이그레이션할 수 있어야 함
+- **좋은 SEO 기본값**: [`hreflang`](https://developers.google.com/search/docs/advanced/crawling/localized-versions)과 같은 유용한 SEO 헤더를 설정해 줌
+- **RTL 지원**: 오른쪽에서 왼쪽으로 읽는 언어(아랍어, 히브리어 등)가 지원되며 구현하기 쉬움
+- **기본 번역**: 클래식 테마 레이블이 [많은 언어](https://github.com/facebook/docusaurus/tree/main/packages/docusaurus-theme-translations/locales)로 번역되어 있음
 
-### i18n non-goals {#i18n-non-goals}
+### i18n 비목표 {#i18n-non-goals}
 
-We don't provide support for:
+우리는 다음에 대한 지원을 제공하지 않습니다:
 
-- **Automatic locale detection**: opinionated, and best done on the [server (your hosting provider)](../deployment.mdx)
-- **Translation SaaS software**: you are responsible to understand the external tools of your choice
-- **Translation of slugs**: technically complicated, little SEO value
+- **자동 로케일 감지**: 의견이 분분하며, [서버(호스팅 제공업체)](../deployment.mdx)에서 가장 잘 수행됨
+- **번역 SaaS 소프트웨어**: 선택한 외부 도구를 이해하는 것은 사용자의 책임임
+- **슬러그 번역**: 기술적으로 복잡하고 SEO 가치가 낮음
 
-## Translation workflow {#translation-workflow}
+## 번역 워크플로우 {#translation-workflow}
 
-### Overview {#overview}
+### 개요 {#overview}
 
-Overview of the workflow to create a translated Docusaurus website:
+번역된 Docusaurus 웹사이트를 만들기 위한 워크플로우 개요:
 
-1. **Configure**: declare the default locale and alternative locales in [`docusaurus.config.js`](../api/docusaurus.config.js.mdx#i18n)
-2. **Translate**: put the translation files at the correct filesystem location
-3. **Deploy**: build and deploy your site using a single or multi-domain strategy
+1. **구성**: [`docusaurus.config.js`](../api/docusaurus.config.js.mdx#i18n)에서 기본 로케일과 대체 로케일을 선언
+2. **번역**: 번역 파일을 올바른 파일 시스템 위치에 넣기
+3. **배포**: 단일 또는 다중 도메인 전략을 사용하여 사이트를 빌드하고 배포
 
-### Translation files {#translation-files}
+### 번역 파일 {#translation-files}
 
-You will work with three kinds of translation files.
+세 가지 종류의 번역 파일을 다루게 됩니다.
 
-#### Markdown files {#markdown-files}
+#### Markdown 파일 {#markdown-files}
 
-This is the main content of your Docusaurus website.
+이는 Docusaurus 웹사이트의 주요 콘텐츠입니다.
 
-Markdown and MDX documents are translated as a whole, to fully preserve the translation context, instead of splitting each sentence as a separate string.
+Markdown과 MDX 문서는 전체적으로 번역되어 번역 맥락을 완전히 보존하며, 각 문장을 별도의 문자열로 분리하지 않습니다.
 
-#### JSON files {#json-files}
+#### JSON 파일 {#json-files}
 
-JSON is used to translate:
+JSON은 다음을 번역하는 데 사용됩니다:
 
-- Your React code: standalone React pages in `src/pages`, or other components
-- Layout labels provided through `themeConfig`: navbar, footer
-- Layout labels provided through plugin options: docs sidebar category labels, blog sidebar title...
+- React 코드: `src/pages`의 독립형 React 페이지 또는 기타 컴포넌트
+- `themeConfig`를 통해 제공되는 레이아웃 레이블: 네비게이션 바, 푸터
+- 플러그인 옵션을 통해 제공되는 레이아웃 레이블: 문서 사이드바 카테고리 레이블, 블로그 사이드바 제목 등
 
-The JSON format used is called **Chrome i18n**:
+사용되는 JSON 형식은 **Chrome i18n**이라고 합니다:
 
 ```json
 {
   "myTranslationKey1": {
-    "message": "Translated message 1",
-    "description": "myTranslationKey1 is used on the homepage"
+    "message": "번역된 메시지 1",
+    "description": "myTranslationKey1은 홈페이지에서 사용됩니다"
   },
   "myTranslationKey2": {
-    "message": "Translated message 2",
-    "description": "myTranslationKey2 is used on the FAQ page"
+    "message": "번역된 메시지 2",
+    "description": "myTranslationKey2는 FAQ 페이지에서 사용됩니다"
   }
 }
 ```
 
-The choice was made for 2 reasons:
+이 선택은 두 가지 이유로 이루어졌습니다:
 
-- **Description attribute**: to help translators with additional context
-- **Widely supported**: [Chrome extensions](https://developer.chrome.com/docs/extensions/mv2/i18n-messages/), [Crowdin](https://support.crowdin.com/file-formats/chrome-json/), [Transifex](https://docs.transifex.com/formats/chrome-json), [Phrase](https://help.phrase.com/help/chrome-json-messages), [Applanga](https://www.applanga.com/docs/formats/chrome_i18n_json), etc.
+- **설명 속성**: 번역자에게 추가 맥락을 제공하기 위해
+- **널리 지원됨**: [Chrome 확장 프로그램](https://developer.chrome.com/docs/extensions/mv2/i18n-messages/), [Crowdin](https://support.crowdin.com/file-formats/chrome-json/), [Transifex](https://docs.transifex.com/formats/chrome-json), [Phrase](https://help.phrase.com/help/chrome-json-messages), [Applanga](https://www.applanga.com/docs/formats/chrome_i18n_json) 등
 
-#### Data files {#data-files}
+#### 데이터 파일 {#data-files}
 
-Some plugins may read from external data files that are localized as a whole. For example, the blog plugin uses an [`authors.yml`](../blog.mdx#global-authors) file that can be translated by creating a copy under `i18n/[locale]/docusaurus-plugin-content-blog/authors.yml`.
+일부 플러그인은 전체적으로 현지화된 외부 데이터 파일에서 읽을 수 있습니다. 예를 들어, 블로그 플러그인은 `i18n/[locale]/docusaurus-plugin-content-blog/authors.yml`에 복사본을 만들어 번역할 수 있는 [`authors.yml`](../blog.mdx#global-authors) 파일을 사용합니다.
 
-### Translation files location {#translation-files-location}
+### 번역 파일 위치 {#translation-files-location}
 
-The translation files should be created at the correct filesystem location.
+번역 파일은 올바른 파일 시스템 위치에 생성되어야 합니다.
 
-Each locale and plugin has its own `i18n` subfolder:
+각 로케일과 플러그인에는 자체 `i18n` 하위 폴더가 있습니다:
 
 ```
 website/i18n/[locale]/[pluginName]/...
@@ -102,34 +102,34 @@ website/i18n/[locale]/[pluginName]/...
 
 :::note
 
-For multi-instance plugins, the path is `website/i18n/[locale]/[pluginName]-[pluginId]/...`.
+다중 인스턴스 플러그인의 경우 경로는 `website/i18n/[locale]/[pluginName]-[pluginId]/...`입니다.
 
 :::
 
-Translating a very simple Docusaurus site in French would lead to the following tree:
+매우 간단한 Docusaurus 사이트를 프랑스어로 번역하면 다음과 같은 트리가 생성됩니다:
 
 ```bash
 website/i18n
 └── fr
-    ├── code.json  # Any text label present in the React code
-    │              # Includes text labels from the themes' code
-    ├── docusaurus-plugin-content-blog # translation data the blog plugin needs
+    ├── code.json  # React 코드에 있는 모든 텍스트 레이블
+    │              # 테마 코드의 텍스트 레이블 포함
+    ├── docusaurus-plugin-content-blog # 블로그 플러그인이 필요로 하는 번역 데이터
     │   └── 2020-01-01-hello.md
     │
-    ├── docusaurus-plugin-content-docs # translation data the docs plugin needs
+    ├── docusaurus-plugin-content-docs # 문서 플러그인이 필요로 하는 번역 데이터
     │   ├── current
     │   │   ├── doc1.md
     │   │   └── doc2.mdx
     │   └── current.json
     │
-    └── docusaurus-theme-classic # translation data the classic theme needs
-        ├── footer.json   # Text labels in your footer theme config
-        └── navbar.json   # Text labels in your navbar theme config
+    └── docusaurus-theme-classic # 클래식 테마가 필요로 하는 번역 데이터
+        ├── footer.json   # 푸터 테마 구성의 텍스트 레이블
+        └── navbar.json   # 네비게이션 바 테마 구성의 텍스트 레이블
 ```
 
-The JSON files are initialized with the [`docusaurus write-translations`](../cli.mdx#docusaurus-write-translations-sitedir) CLI command. Each plugin sources its own translated content under the corresponding folder, while the `code.json` file defines all text labels used in the React code.
+JSON 파일은 [`docusaurus write-translations`](../cli.mdx#docusaurus-write-translations-sitedir) CLI 명령으로 초기화됩니다. 각 플러그인은 해당 폴더 아래에 자체 번역된 콘텐츠를 소싱하며, `code.json` 파일은 React 코드에서 사용되는 모든 텍스트 레이블을 정의합니다.
 
-Each content plugin or theme is different, and **defines its own translation files location**:
+각 콘텐츠 플러그인이나 테마는 다르며, **자체 번역 파일 위치를 정의합니다**:
 
 - [Docs i18n](../api/plugins/plugin-content-docs.mdx#i18n)
 - [Blog i18n](../api/plugins/plugin-content-blog.mdx#i18n)

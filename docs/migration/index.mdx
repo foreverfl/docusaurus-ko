@@ -2,31 +2,31 @@
 slug: /migration
 ---
 
-# Upgrading Docusaurus
+# Docusaurus 업그레이드
 
-Docusaurus versioning is based on the `major.minor.patch` scheme and respects [**Semantic Versioning**](https://semver.org/).
+Docusaurus 버전 관리는 `major.minor.patch` 체계를 기반으로 하며 [**Semantic Versioning**](https://semver.org/)을 준수합니다.
 
-**Breaking changes** are only released on major version upgrades, and thoroughly documented in the following upgrade guides.
+**호환성을 깨는 변경사항**은 주요 버전 업그레이드에서만 릴리스되며, 다음 업그레이드 가이드에 자세히 문서화되어 있습니다.
 
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 
-## Troubleshooting upgrades
+## 업그레이드 문제 해결
 
-When upgrading Docusaurus you may experience issues caused by mismatching cached dependencies - there are a few troubleshooting steps you should perform to resolve these common issues before reporting a bug or seeking support.
+Docusaurus를 업그레이드할 때 캐시된 종속성의 불일치로 인한 문제가 발생할 수 있습니다 - 버그를 보고하거나 지원을 요청하기 전에 이러한 일반적인 문제를 해결하기 위해 수행해야 할 몇 가지 문제 해결 단계가 있습니다.
 
-### Run the `clear` command
+### `clear` 명령 실행
 
-This CLI command is used to clear a Docusaurus site's generated assets, caches and build artifacts.
+이 CLI 명령은 Docusaurus 사이트의 생성된 자산, 캐시 및 빌드 아티팩트를 지우는 데 사용됩니다.
 
 ```bash npm2yarn
 npm run clear
 ```
 
-### Remove `node_modules` and your lock file(s)
+### `node_modules`와 잠금 파일 제거
 
-Remove the `node_modules` folder and your package manager's lock file using the following:
+다음을 사용하여 `node_modules` 폴더와 패키지 관리자의 잠금 파일을 제거하세요:
 
 <Tabs>
 <TabItem label="Bash" value="bash">
@@ -45,7 +45,7 @@ rm -rf node_modules yarn.lock package-lock.json
 </TabItem>
 </Tabs>
 
-Then reinstall packages and regenerate the `lock` file using:
+그런 다음 다음을 사용하여 패키지를 다시 설치하고 `lock` 파일을 재생성하세요:
 
 ```bash npm2yarn
 npm install

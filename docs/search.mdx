@@ -4,77 +4,77 @@ keywords:
   - search
 ---
 
-# Search
+# 검색
 
-There are a few options you can use to add search to your website:
+웹사이트에 검색 기능을 추가하는 몇 가지 옵션이 있습니다:
 
-- 🥇 [Algolia DocSearch](#using-algolia-docsearch) (**official**)
+- 🥇 [Algolia DocSearch](#using-algolia-docsearch) (**공식**)
 - 👥 [Typesense DocSearch](#using-typesense-docsearch)
-- 👥 [Local Search](#using-local-search)
-- 👥 [Your own `SearchBar` component](#using-your-own-search)
+- 👥 [로컬 검색](#using-local-search)
+- 👥 [자체 `SearchBar` 컴포넌트](#using-your-own-search)
 
 :::info
 
-🥇 Docusaurus provides **first-class support** for [Algolia DocSearch](#using-algolia-docsearch).
+🥇 Docusaurus는 [Algolia DocSearch](#using-algolia-docsearch)에 대해 **일급 지원**을 제공합니다.
 
-👥 Other options are **maintained by the community**: please report bugs to their respective repositories.
+👥 다른 옵션들은 **커뮤니티에 의해 유지보수**됩니다: 버그는 각각의 저장소에 보고해 주세요.
 
 :::
 
-## 🥇 Using Algolia DocSearch {#using-algolia-docsearch}
+## 🥇 Algolia DocSearch 사용하기 {#using-algolia-docsearch}
 
-Docusaurus has **official support** for [Algolia DocSearch](https://docsearch.algolia.com).
+Docusaurus는 [Algolia DocSearch](https://docsearch.algolia.com)에 대한 **공식 지원**을 제공합니다.
 
-The service is **free** for any developer documentation or technical blog: just make sure to read the [checklist](https://docsearch.algolia.com/docs/who-can-apply/) and [apply to the DocSearch program](https://docsearch.algolia.com/apply).
+이 서비스는 모든 개발자 문서나 기술 블로그에 대해 **무료**입니다: [체크리스트](https://docsearch.algolia.com/docs/who-can-apply/)를 읽고 [DocSearch 프로그램에 신청](https://docsearch.algolia.com/apply)하세요.
 
-DocSearch crawls your website once a week (the schedule is configurable from the web interface) and aggregates all the content in an Algolia index. This content is then queried directly from your front-end using the Algolia API.
+DocSearch는 일주일에 한 번 웹사이트를 크롤링하고(일정은 웹 인터페이스에서 구성 가능) 모든 콘텐츠를 Algolia 인덱스에 집계합니다. 그런 다음 이 콘텐츠는 Algolia API를 사용하여 프론트엔드에서 직접 쿼리됩니다.
 
-If your website is [not eligible](https://docsearch.algolia.com/docs/who-can-apply) for the free, hosted version of DocSearch, or if your website sits behind a firewall and is not public, then you can [run your own](https://docsearch.algolia.com/docs/run-your-own/) DocSearch crawler.
+웹사이트가 DocSearch의 무료 호스팅 버전에 [적합하지 않거나](https://docsearch.algolia.com/docs/who-can-apply), 방화벽 뒤에 있어 공개적으로 접근할 수 없는 경우 [자체적으로 실행](https://docsearch.algolia.com/docs/run-your-own/)할 수 있습니다.
 
 :::note
 
-By default, the Docusaurus preset generates a [sitemap.xml](https://docusaurus.io/sitemap.xml) that the Algolia crawler can use.
+기본적으로 Docusaurus 프리셋은 Algolia 크롤러가 사용할 수 있는 [sitemap.xml](https://docusaurus.io/sitemap.xml)을 생성합니다.
 
 :::
 
-:::info From the old docsearch?
+:::info 이전 docsearch를 사용하고 계셨나요?
 
-You can read more about migration from the legacy DocSearch infra in [our blog post](/blog/2021/11/21/algolia-docsearch-migration) or [the DocSearch migration docs](https://docsearch.algolia.com/docs/migrating-from-legacy).
-
-:::
-
-### Index Configuration {#algolia-index-configuration}
-
-After your application has been approved and deployed, you will receive an email with all the details for you to add DocSearch to your project. Editing and managing your crawls can be done via [the web interface](https://crawler.algolia.com/). Indices are readily available after deployment, so manual configuration usually isn't necessary.
-
-:::danger Use the recommended crawler config
-
-It is highly recommended to use our official [**Docusaurus v3 crawler configuration**](https://docsearch.algolia.com/docs/templates/#docusaurus-v3-template). We cannot support you if you choose a different crawler configuration.
+레거시 DocSearch 인프라에서의 마이그레이션에 대해 [우리의 블로그 포스트](/blog/2021/11/21/algolia-docsearch-migration)나 [DocSearch 마이그레이션 문서](https://docsearch.algolia.com/docs/migrating-from-legacy)에서 더 자세히 읽어볼 수 있습니다.
 
 :::
 
-:::warning When updating your crawler config
+### 인덱스 구성 {#algolia-index-configuration}
 
-The crawler configuration contains a `initialIndexSettings`, which will only be used to initialize your Algolia index if it does not exist yet.
+애플리케이션이 승인되고 배포된 후, 프로젝트에 DocSearch를 추가하는 데 필요한 모든 세부 정보가 포함된 이메일을 받게 됩니다. 크롤링 편집 및 관리는 [웹 인터페이스](https://crawler.algolia.com/)를 통해 할 수 있습니다. 인덱스는 배포 후 즉시 사용 가능하므로 일반적으로 수동 구성이 필요하지 않습니다.
 
-If you update your `initialIndexSettings` crawler setting, it is possible to update the index manually through the interface, but [the Algolia team recommends to delete your index and then restart a crawl](https://github.com/facebook/docusaurus/issues/9200#issuecomment-1667338492) to fully reinitialize it with the new settings.
+:::danger 권장 크롤러 구성을 사용하세요
+
+공식 [**Docusaurus v3 크롤러 구성**](https://docsearch.algolia.com/docs/templates/#docusaurus-v3-template)을 사용하는 것이 매우 권장됩니다. 다른 크롤러 구성을 선택하면 지원해 드릴 수 없습니다.
 
 :::
 
-### Connecting Algolia {#connecting-algolia}
+:::warning 크롤러 구성을 업데이트할 때
 
-Docusaurus' own `@docusaurus/preset-classic` supports Algolia DocSearch integration. If you use the classic preset, no additional installation is needed.
+크롤러 구성에는 `initialIndexSettings`가 포함되어 있으며, 이는 Algolia 인덱스가 아직 존재하지 않는 경우에만 초기화하는 데 사용됩니다.
+
+`initialIndexSettings` 크롤러 설정을 업데이트하는 경우, 인터페이스를 통해 인덱스를 수동으로 업데이트할 수 있지만, [Algolia 팀은 인덱스를 삭제한 다음 크롤링을 다시 시작하여](https://github.com/facebook/docusaurus/issues/9200#issuecomment-1667338492) 새 설정으로 완전히 재초기화하는 것을 권장합니다.
+
+:::
+
+### Algolia 연결하기 {#connecting-algolia}
+
+Docusaurus의 `@docusaurus/preset-classic`은 Algolia DocSearch 통합을 지원합니다. 클래식 프리셋을 사용하는 경우 추가 설치가 필요하지 않습니다.
 
 <details>
-<summary>Installation steps when not using <code>@docusaurus/preset-classic</code></summary>
+<summary><code>@docusaurus/preset-classic</code>을 사용하지 않을 때의 설치 단계</summary>
 
-1. Install the package:
+1. 패키지 설치:
 
 ```bash npm2yarn
 npm install --save @docusaurus/theme-search-algolia
 ```
 
-2. Register the theme in `docusaurus.config.js`:
+2. `docusaurus.config.js`에 테마 등록:
 
 ```js title="docusaurus.config.js"
 export default {
@@ -89,7 +89,7 @@ export default {
 
 </details>
 
-Then, add an `algolia` field in your `themeConfig`. **[Apply for DocSearch](https://docsearch.algolia.com/apply/)** to get your Algolia index and API key.
+그런 다음 `themeConfig`에 `algolia` 필드를 추가하세요. **[DocSearch에 신청](https://docsearch.algolia.com/apply/)**하여 Algolia 인덱스와 API 키를 받으세요.
 
 ```js title="docusaurus.config.js"
 export default {
@@ -98,36 +98,36 @@ export default {
     // ...
     // highlight-start
     algolia: {
-      // The application ID provided by Algolia
+      // Algolia에서 제공한 애플리케이션 ID
       appId: 'YOUR_APP_ID',
 
-      // Public API key: it is safe to commit it
+      // 공개 API 키: 커밋해도 안전합니다
       apiKey: 'YOUR_SEARCH_API_KEY',
 
       indexName: 'YOUR_INDEX_NAME',
 
-      // Optional: see doc section below
+      // 선택사항: 아래 문서 섹션 참조
       contextualSearch: true,
 
-      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+      // 선택사항: history.push 대신 window.location을 통해 탐색이 발생해야 하는 도메인을 지정합니다. Algolia 설정이 여러 문서 사이트를 크롤링하고 window.location.href로 이동하려는 경우에 유용합니다.
       externalUrlRegex: 'external\\.com|domain\\.com',
 
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      // 선택사항: Algolia에서 검색 결과의 URL 부분을 대체합니다. 다른 baseUrl을 사용하여 여러 배포에 동일한 검색 인덱스를 사용할 때 유용합니다. from 파라미터에 정규식이나 문자열을 사용할 수 있습니다. 예: localhost:3000 vs myCompany.com/docs
       replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
+        from: '/docs/', // 또는 정규식으로: /\/docs\//
         to: '/',
       },
 
-      // Optional: Algolia search parameters
+      // 선택사항: Algolia 검색 파라미터
       searchParameters: {},
 
-      // Optional: path for search page that enabled by default (`false` to disable it)
+      // 선택사항: 기본적으로 활성화된 검색 페이지 경로 (비활성화하려면 'false')
       searchPagePath: 'search',
 
-      // Optional: whether the insights feature is enabled or not on Docsearch (`false` by default)
+      // 선택사항: Docsearch에서 인사이트 기능이 활성화되었는지 여부 (기본값은 'false')
       insights: false,
 
-      //... other Algolia params
+      //... 기타 Algolia 파라미터
     },
     // highlight-end
   },
@@ -136,25 +136,25 @@ export default {
 
 :::info
 
-The `searchParameters` option used to be named `algoliaOptions` in Docusaurus v1.
+`searchParameters` 옵션은 Docusaurus v1에서 `algoliaOptions`라는 이름이었습니다.
 
-Refer to its [official DocSearch documentation](https://docsearch.algolia.com/docs/api#searchparameters) for possible values.
+가능한 값은 [공식 DocSearch 문서](https://docsearch.algolia.com/docs/api#searchparameters)를 참조하세요.
 
 :::
 
 :::warning
 
-The search feature will not work reliably until Algolia crawls your site.
+Algolia가 사이트를 크롤링할 때까지 검색 기능이 제대로 작동하지 않을 수 있습니다.
 
-If search doesn't work after any significant change, please use the Algolia dashboard to **trigger a new crawl**.
+중요한 변경 후 검색이 작동하지 않는 경우, Algolia 대시보드를 사용하여 **새 크롤링을 트리거**하세요.
 
 :::
 
-### Contextual search {#contextual-search}
+### 컨텍스트 검색 {#contextual-search}
 
-Contextual search is **enabled by default**.
+컨텍스트 검색은 **기본적으로 활성화**되어 있습니다.
 
-It ensures that search results are **relevant to the current language and version**.
+이는 검색 결과가 **현재 언어와 버전**과 관련이 있도록 보장합니다.
 
 ```js title="docusaurus.config.js"
 export default {
@@ -170,22 +170,22 @@ export default {
 };
 ```
 
-Let's consider you have 2 docs versions (**v1** and **v2**) and 2 languages (`en` and `fr`).
+2개의 문서 버전(**v1**과 **v2**)과 2개의 언어(`en`과 `fr`)가 있다고 가정해 봅시다.
 
-When browsing v2 docs, it would be odd to return search results for the v1 documentation. Sometimes v1 and v2 docs are quite similar, and you would end up with duplicate search results for the same query (one result per version).
+v2 문서를 탐색할 때 v1 문서에 대한 검색 결과가 나오는 것은 이상할 것입니다. 때로는 v1과 v2 문서가 매우 유사해서 동일한 쿼리에 대해 중복된 검색 결과가 나올 수 있습니다(버전당 하나의 결과).
 
-Similarly, when browsing the French site, it would be odd to return search results for the English docs.
+마찬가지로 프랑스어 사이트를 탐색할 때 영어 문서에 대한 검색 결과가 나오는 것도 이상할 것입니다.
 
-To solve this problem, the contextual search feature understands that you are browsing a specific docs version and language, and will create the search query filters dynamically.
+이 문제를 해결하기 위해 컨텍스트 검색 기능은 특정 문서 버전과 언어를 탐색하고 있음을 이해하고 검색 쿼리 필터를 동적으로 생성합니다.
 
-- on `/en/docs/v1/myDoc`, search results will only include **English** results for the **v1** docs (+ other unversioned pages)
-- on `/fr/docs/v2/myDoc`, search results will only include **French** results for the **v2** docs (+ other unversioned pages)
+- `/en/docs/v1/myDoc`에서는 검색 결과에 **v1** 문서의 **영어** 결과만 포함됩니다 (+ 기타 버전이 없는 페이지)
+- `/fr/docs/v2/myDoc`에서는 검색 결과에 **v2** 문서의 **프랑스어** 결과만 포함됩니다 (+ 기타 버전이 없는 페이지)
 
 :::info
 
-When using `contextualSearch: true` (default), the contextual facet filters will be merged with the ones provided with `algolia.searchParameters.facetFilters` .
+`contextualSearch: true`(기본값)를 사용할 때, 컨텍스트 패싯 필터는 `algolia.searchParameters.facetFilters`와 병합됩니다.
 
-For specific needs, you can disable `contextualSearch` and define your own `facetFilters`:
+특정 요구사항이 있는 경우 `contextualSearch`를 비활성화하고 자체 `facetFilters`를 정의할 수 있습니다:
 
 ```js title="docusaurus.config.js"
 export default {
@@ -204,21 +204,21 @@ export default {
 };
 ```
 
-Refer to the relevant [Algolia faceting documentation](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/).
+관련 [Algolia 패싯 문서](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/)를 참조하세요.
 
 :::
 
-:::warning Contextual search doesn't work?
+:::warning 컨텍스트 검색이 작동하지 않나요?
 
-If you only get search results when Contextual Search is disabled, this is very likely because of an [index configuration issue](#algolia-no-search-results).
+맥락적 검색이 비활성화된 경우에만 검색 결과를 얻을 수 있다면, 이는 [인덱스 구성 문제](#algolia-no-search-results) 때문일 가능성이 높습니다.
 
 :::
 
-### Styling your Algolia search {#styling-your-algolia-search}
+### Algolia 검색 스타일링 {#styling-your-algolia-search}
 
-By default, DocSearch comes with a fine-tuned theme that was designed for accessibility, making sure that colors and contrasts respect standards.
+기본적으로 DocSearch는 접근성을 고려하여 설계된 미세 조정된 테마와 함께 제공됩니다. 이는 색상과 대비가 표준을 준수하도록 보장합니다.
 
-Still, you can reuse the [Infima CSS variables](styling-layout.mdx#styling-your-site-with-infima) from Docusaurus to style DocSearch by editing the `/src/css/custom.css` file.
+그래도 `/src/css/custom.css` 파일을 편집하여 Docusaurus의 [Infima CSS 변수](styling-layout.mdx#styling-your-site-with-infima)를 재사용하여 DocSearch의 스타일을 지정할 수 있습니다.
 
 ```css title="/src/css/custom.css"
 [data-theme='light'] .DocSearch {
@@ -262,9 +262,9 @@ Still, you can reuse the [Infima CSS variables](styling-layout.mdx#styling-your-
 }
 ```
 
-### Customizing the Algolia search behavior {#customizing-the-algolia-search-behavior}
+### Algolia 검색 동작 사용자 정의 {#customizing-the-algolia-search-behavior}
 
-Algolia DocSearch supports a [list of options](https://docsearch.algolia.com/docs/api/) that you can pass to the `algolia` field in the `docusaurus.config.js` file.
+Algolia DocSearch는 `docusaurus.config.js` 파일의 `algolia` 필드에 전달할 수 있는 [옵션 목록](https://docsearch.algolia.com/docs/api/)을 지원합니다.
 
 ```js title="docusaurus.config.js"
 export default {
@@ -273,32 +273,32 @@ export default {
     algolia: {
       apiKey: 'YOUR_API_KEY',
       indexName: 'YOUR_INDEX_NAME',
-      // Options...
+      // 옵션...
     },
   },
 };
 ```
 
-### Editing the Algolia search component {#editing-the-algolia-search-component}
+### Algolia 검색 컴포넌트 편집 {#editing-the-algolia-search-component}
 
-If you prefer to edit the Algolia search React component, [swizzle](swizzling.mdx) the `SearchBar` component in `@docusaurus/theme-search-algolia`:
+Algolia 검색 React 컴포넌트를 편집하려면 `@docusaurus/theme-search-algolia`의 `SearchBar` 컴포넌트를 [스위즐](swizzling.mdx)하세요:
 
 ```bash npm2yarn
 npm run swizzle @docusaurus/theme-search-algolia SearchBar
 ```
 
-### Troubleshooting {#algolia-troubleshooting}
+### 문제 해결 {#algolia-troubleshooting}
 
-Here are the most common issues Docusaurus users face when using Algolia DocSearch.
+다음은 Docusaurus 사용자가 Algolia DocSearch를 사용할 때 가장 자주 겪는 문제입니다.
 
-#### No Search Results {#algolia-no-search-results}
+#### 검색 결과 없음 {#algolia-no-search-results}
 
-Seeing no search results is usually related to an **index configuration problem**.
+검색 결과가 없는 것은 대개 **인덱스 구성 문제**와 관련이 있습니다.
 
 <details>
-  <summary>How to check if I have an config problem?</summary>
+  <summary>구성 문제가 있는지 어떻게 확인할 수 있나요?</summary>
 
-Docusaurus uses [Algolia faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) for its [Contextual Search](#contextual-search) feature, to create dynamic queries such as:
+Docusaurus는 [맥락적 검색](#contextual-search) 기능을 위해 [Algolia 패싯](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/)을 사용하여 다음과 같은 동적 쿼리를 생성합니다:
 
 ```json
 [
@@ -312,66 +312,66 @@ Docusaurus uses [Algolia faceting](https://www.algolia.com/doc/guides/managing-r
 ]
 ```
 
-On the Algolia UI, your index should allow to create facet queries on fields `docusaurus_tag`, `language`, `lang`, `version`, `type`, as shown in the screenshot below:
+Algolia UI에서 인덱스는 아래 스크린샷과 같이 `docusaurus_tag`, `language`, `lang`, `version`, `type` 필드에 대한 패싯 쿼리 생성을 허용해야 합니다:
 
-![Algolia index showing appropriate faceting fields](/img/docsearch-troubleshoot-index-facets.jpg)
+![적절한 패싯 필드를 보여주는 Algolia 인덱스](/img/docsearch-troubleshoot-index-facets.jpg)
 
-Alternatively, if you disable [Contextual Search](#contextual-search) with `{contextualSearch: false}` (which we don't particularly recommend), Docusaurus will not use facet queries, and you should start seeing results.
+또는 `{contextualSearch: false}`로 [맥락적 검색](#contextual-search)을 비활성화하면(권장하지 않음), Docusaurus는 패싯 쿼리를 사용하지 않고 결과가 표시되기 시작해야 합니다.
 
 </details>
 
-:::danger Use the recommended configuration
+:::danger 권장 구성을 사용하세요
 
-We [recommend a specific crawler configuration](#algolia-index-configuration) for a good reason. We cannot support you if you choose to use a different configuration.
+우리는 [특정 크롤러 구성](#algolia-index-configuration)을 이유 있게 권장합니다. 다른 구성을 선택한 경우 지원해 드릴 수 없습니다.
 
 :::
 
-You can fix index configuration problems by following those steps:
+다음 단계를 따라 인덱스 구성 문제를 해결할 수 있습니다:
 
-1. Use the [recommend crawler configuration](#algolia-index-configuration)
-2. Delete your index through the UI
-3. Trigger a new crawl through the UI
-4. Check your index is recreated with the appropriate faceting fields: `docusaurus_tag`, `language`, `lang`, `version`, `type`
-5. See that you now get search results, even with [Contextual Search](#contextual-search) enabled
+1. [권장 크롤러 구성](#algolia-index-configuration)을 사용하세요
+2. UI를 통해 인덱스를 삭제하세요
+3. UI를 통해 새 크롤을 트리거하세요
+4. 인덱스가 적절한 패싯 필드(`docusaurus_tag`, `language`, `lang`, `version`, `type`)로 재생성되었는지 확인하세요
+5. [맥락적 검색](#contextual-search)이 활성화된 상태에서도 이제 검색 결과가 표시되는지 확인하세요
 
-### Support {#algolia-support}
+### 지원 {#algolia-support}
 
-The Algolia DocSearch team can help you figure out search problems on your site.
+Algolia DocSearch 팀은 사이트의 검색 문제를 해결하는 데 도움을 줄 수 있습니다.
 
-You can reach out to Algolia via [their support page](https://algolia.com/support) or on [Discord](https://discord.gg/wr2m5j948P).
+[지원 페이지](https://algolia.com/support)나 [Discord](https://discord.gg/wr2m5j948P)를 통해 Algolia에 연락할 수 있습니다.
 
-Docusaurus also has an `#algolia` channel on [Discord](https://discordapp.com/invite/docusaurus).
+Docusaurus도 [Discord](https://discordapp.com/invite/docusaurus)에 `#algolia` 채널이 있습니다.
 
-## 👥 Using Typesense DocSearch {#using-typesense-docsearch}
+## 👥 Typesense DocSearch 사용하기 {#using-typesense-docsearch}
 
-[Typesense](https://typesense.org) DocSearch works similar to Algolia DocSearch, except that your website is indexed into a Typesense search cluster.
+[Typesense](https://typesense.org) DocSearch는 Algolia DocSearch와 유사하게 작동하지만, 웹사이트가 Typesense 검색 클러스터에 인덱싱된다는 점이 다릅니다.
 
-Typesense is an [open source](https://github.com/typesense/typesense) instant-search engine that you can either:
+Typesense는 [오픈 소스](https://github.com/typesense/typesense) 즉시 검색 엔진으로, 다음 두 가지 방법으로 사용할 수 있습니다:
 
-- [Self-Host](https://typesense.org/docs/guide/install-typesense.html#option-2-local-machine-self-hosting) on your own servers or
-- Use the Managed [Typesense Cloud](https://cloud.typesense.org) service.
+- 자체 서버에 [자체 호스팅](https://typesense.org/docs/guide/install-typesense.html#option-2-local-machine-self-hosting)하거나
+- 관리형 [Typesense Cloud](https://cloud.typesense.org) 서비스를 사용합니다.
 
-Similar to Algolia DocSearch, there are two components:
+Algolia DocSearch와 마찬가지로 두 가지 구성 요소가 있습니다:
 
-- [typesense-docsearch-scraper](https://github.com/typesense/typesense-docsearch-scraper) - which scrapes your website and indexes the data in your Typesense cluster.
-- [docusaurus-theme-search-typesense](https://github.com/typesense/docusaurus-theme-search-typesense) - a search bar UI component to add to your website.
+- [typesense-docsearch-scraper](https://github.com/typesense/typesense-docsearch-scraper) - 웹사이트를 스크랩하고 Typesense 클러스터에 데이터를 인덱싱합니다.
+- [docusaurus-theme-search-typesense](https://github.com/typesense/docusaurus-theme-search-typesense) - 웹사이트에 추가할 검색 바 UI 컴포넌트입니다.
 
-Read a step-by-step walk-through of how to [run typesense-docsearch-scraper here](https://typesense.org/docs/guide/docsearch.html#step-1-set-up-docsearch-scraper) and how to [install the Search Bar in your Docusaurus Site here](https://typesense.org/docs/guide/docsearch.html#option-a-docusaurus-powered-sites).
+[typesense-docsearch-scraper를 실행하는 방법](https://typesense.org/docs/guide/docsearch.html#step-1-set-up-docsearch-scraper)과 [Docusaurus 사이트에 검색 바를 설치하는 방법](https://typesense.org/docs/guide/docsearch.html#option-a-docusaurus-powered-sites)에 대한 단계별 안내를 읽어보세요.
 
-## 👥 Using Local Search {#using-local-search}
+## 👥 로컬 검색 사용하기 {#using-local-search}
 
-You can use a local search plugin for websites where the search index is small and can be downloaded to your users' browsers when they visit your website.
+검색 인덱스가 작고 사용자가 웹사이트를 방문할 때 브라우저로 다운로드할 수 있는 웹사이트의 경우 로컬 검색 플러그인을 사용할 수 있습니다.
 
-You'll find a list of community-supported [local search plugins listed here](https://docusaurus.io/community/resources#search).
+[여기에 나열된 커뮤니티 지원 로컬 검색 플러그인](https://docusaurus.io/community/resources#search) 목록을 찾을 수 있습니다.
 
-## 👥 Using your own search {#using-your-own-search}
+## 👥 자체 검색 사용하기 {#using-your-own-search}
 
-To use your own search, swizzle the `SearchBar` component in `@docusaurus/theme-classic`
+자체 검색을 사용하려면 `@docusaurus/theme-classic`의 `SearchBar` 컴포넌트를 스위즐하세요
 
 ```bash npm2yarn
 npm run swizzle @docusaurus/theme-classic SearchBar
 ```
 
-This will create an `src/theme/SearchBar` file in your project folder. Restart your dev server and edit the component, you will see that Docusaurus uses your own `SearchBar` component now.
+이렇게 하면 프로젝트 폴더에 `src/theme/SearchBar` 파일이 생성됩니다. 개발 서버를 다시 시작하고 컴포넌트를 편집하면 Docusaurus가 이제 여러분의 자체 `SearchBar` 컴포넌트를 사용하는 것을 볼 수 있습니다.
 
-**Notes**: You can alternatively [swizzle from Algolia SearchBar](#editing-the-algolia-search-component) and create your own search component from there.
+**참고**: 또는 [Algolia SearchBar에서 스위즐](#editing-the-algolia-search-component)하고 거기서부터 자체 검색 컴포넌트를 만들 수 있습니다.

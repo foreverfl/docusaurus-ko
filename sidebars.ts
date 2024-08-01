@@ -12,7 +12,7 @@ const sidebars: SidebarsConfig = {
     'introduction',
     {
       type: 'category',
-      label: 'Getting Started',
+      label: '시작하기',
       link: {
         type: 'generated-index',
       },
@@ -26,7 +26,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Guides',
+      label: '가이드',
       link: {
         type: 'generated-index',
         title: 'Docusaurus Guides',
@@ -95,7 +95,7 @@ const sidebars: SidebarsConfig = {
         'deployment',
         {
           type: 'category',
-          label: 'Internationalization',
+          label: '국제화',
           link: {type: 'doc', id: 'i18n/introduction'},
           items: [
             {
@@ -132,7 +132,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Upgrading',
+      label: '업그레이드',
       link: {
         type: 'doc',
         id: 'migration/index',

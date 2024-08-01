@@ -1,32 +1,32 @@
 ---
-description: How to make your Docusaurus site maximally search-engine-friendly.
+description: Docusaurus 사이트를 최대한 검색 엔진 친화적으로 만드는 방법.
 sidebar_label: SEO
 keywords:
   - seo
   - positioning
 ---
 
-# Search engine optimization (SEO)
+# 검색 엔진 최적화 (SEO)
 
 import BrowserWindow from '@site/src/components/BrowserWindow';
 
-Docusaurus supports search engine optimization in a variety of ways.
+Docusaurus는 다양한 방식으로 검색 엔진 최적화를 지원합니다.
 
-## Global metadata {#global-metadata}
+## 전역 메타데이터 {#global-metadata}
 
-Provide global meta attributes for the entire site through the [site configuration](./configuration.mdx#site-metadata). The metadata will all be rendered in the HTML `<head>` using the key-value pairs as the prop name and value. The `metadata` attribute is a convenient shortcut to declare `<meta>` tags, but it is also possible to inject arbitrary tags in `<head>` with the `headTags` attribute.
+[사이트 구성](./configuration.mdx#site-metadata)을 통해 전체 사이트에 대한 전역 메타 속성을 제공합니다. 메타데이터는 모두 HTML `<head>`에 키-값 쌍을 prop 이름과 값으로 사용하여 렌더링됩니다. `metadata` 속성은 `<meta>` 태그를 선언하는 편리한 단축키이지만, `headTags` 속성을 사용하여 `<head>`에 임의의 태그를 주입하는 것도 가능합니다.
 
 ```js title="docusaurus.config.js"
 export default {
   themeConfig: {
-    // Declare some <meta> tags
+    // <meta> 태그 선언
     metadata: [
       {name: 'keywords', content: 'cooking, blog'},
       {name: 'twitter:card', content: 'summary_large_image'},
     ],
   },
   headTags: [
-    // Declare a <link> preconnect tag
+    // <link> preconnect 태그 선언
     {
       tagName: 'link',
       attributes: {
@@ -34,7 +34,7 @@ export default {
         href: 'https://example.com',
       },
     },
-    // Declare some json-ld structured data
+    // json-ld 구조화된 데이터 선언
     {
       tagName: 'script',
       attributes: {
@@ -52,16 +52,16 @@ export default {
 };
 ```
 
-Docusaurus adds some metadata out-of-the-box. For example, if you have configured [i18n](./i18n/i18n-introduction.mdx), you will get a [`hreflang`](https://developers.google.com/search/docs/advanced/crawling/localized-versions) alternate link.
+Docusaurus는 기본적으로 일부 메타데이터를 추가합니다. 예를 들어, [i18n](./i18n/i18n-introduction.mdx)을 구성한 경우 [`hreflang`](https://developers.google.com/search/docs/advanced/crawling/localized-versions) 대체 링크를 얻게 됩니다.
 
-To read more about types of meta tags, visit [the MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta).
+메타 태그의 유형에 대해 더 자세히 알아보려면 [MDN 문서](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta)를 방문하세요.
 
-## Single page metadata {#single-page-metadata}
+## 단일 페이지 메타데이터 {#single-page-metadata}
 
-Similar to [global metadata](#global-metadata), Docusaurus also allows for the addition of meta-information to individual pages. Follow [this guide](./guides/markdown-features/markdown-features-head-metadata.mdx) for configuring the `<head>` tag. In short:
+[전역 메타데이터](#global-metadata)와 유사하게 Docusaurus는 개별 페이지에 메타 정보를 추가할 수 있게 합니다. `<head>` 태그 구성에 대해서는 [이 가이드](./guides/markdown-features/markdown-features-head-metadata.mdx)를 따르세요. 간단히 말하면:
 
 ```md title="my-markdown-page.mdx"
-# A cooking guide
+# 요리 가이드
 
 <head>
   <meta name="keywords" content="cooking, blog" />
@@ -78,31 +78,31 @@ Similar to [global metadata](#global-metadata), Docusaurus also allows for the a
   </script>
 </head>
 
-Some content...
+일부 내용...
 ```
 
-Docusaurus automatically adds `description`, `title`, canonical URL links, and other useful metadata to each Markdown page. They are configurable through [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter):
+Docusaurus는 각 Markdown 페이지에 `description`, `title`, 정규 URL 링크 및 기타 유용한 메타데이터를 자동으로 추가합니다. 이들은 [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter)를 통해 구성할 수 있습니다:
 
 ```md
 ---
-title: Title for search engines; can be different from the actual heading
-description: A short description of this page
-image: a thumbnail image to be shown in social media cards
-keywords: [keywords, describing, the main topics]
+title: 검색 엔진용 제목; 실제 제목과 다를 수 있음
+description: 이 페이지에 대한 간단한 설명
+image: 소셜 미디어 카드에 표시될 썸네일 이미지
+keywords: [주요 주제를, 설명하는, 키워드]
 ---
 ```
 
-When creating your React page, adding these fields in `Layout` would also improve SEO.
+React 페이지를 만들 때 `Layout`에 이러한 필드를 추가하면 SEO도 향상됩니다.
 
 :::tip
 
-Prefer to use [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter) for fields like `description` and `keywords`: Docusaurus will automatically apply this to both `description` and `og:description`, while you would have to manually declare two metadata tags when using the `<head>` tag.
+`description`과 `keywords`와 같은 필드에는 [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter)를 사용하는 것이 좋습니다: Docusaurus는 이를 자동으로 `description`과 `og:description` 모두에 적용하지만, `<head>` 태그를 사용할 때는 두 메타데이터 태그를 수동으로 선언해야 합니다.
 
 :::
 
 :::info
 
-The official plugins all support the following [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter): `title`, `description`, `keywords` and `image`. Refer to their respective API documentation for additional [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter) support:
+공식 플러그인은 모두 다음과 같은 [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter)를 지원합니다: `title`, `description`, `keywords`, `image`. 추가적인 [front matter](./guides/markdown-features/markdown-features-intro.mdx#front-matter) 지원은 각 플러그인의 API 문서를 참조하세요:
 
 - [Docs front matter](./api/plugins/plugin-content-docs.mdx#markdown-front-matter)
 - [Blog front matter](./api/plugins/plugin-content-blog.mdx#markdown-front-matter)
@@ -110,7 +110,7 @@ The official plugins all support the following [front matter](./guides/markdown-
 
 :::
 
-For JSX pages, you can use the Docusaurus [`<Head>`](docusaurus-core.mdx#head) component.
+JSX 페이지의 경우 Docusaurus [`<Head>`](docusaurus-core.mdx#head) 컴포넌트를 사용할 수 있습니다.
 
 ```jsx title="my-react-page.jsx"
 import React from 'react';
@@ -142,64 +142,64 @@ export default function page() {
 
 :::tip
 
-For convenience, the default theme `<Layout>` component accept `title` and `description` as props.
+편의를 위해 기본 테마 `<Layout>` 컴포넌트는 `title`과 `description`을 props로 받습니다.
 
 :::
 
-## Static HTML generation {#static-html-generation}
+## 정적 HTML 생성 {#static-html-generation}
 
-Docusaurus is a static site generator—HTML files are statically generated for every URL route, which helps search engines discover your content more easily.
+Docusaurus는 정적 사이트 생성기입니다. 모든 URL 경로에 대해 HTML 파일이 정적으로 생성되어 검색 엔진이 콘텐츠를 더 쉽게 발견할 수 있도록 합니다.
 
-## Image meta description {#image-meta-description}
+## 이미지 메타 설명 {#image-meta-description}
 
-The alt tag for an image tells the search engine what the image is about, and is used when the image can't be visually seen, e.g. when using a screen reader, or when the image is broken. Alt tags are commonly supported in Markdown.
+이미지의 alt 태그는 검색 엔진에 이미지의 내용을 알려주며, 스크린 리더를 사용하거나 이미지가 깨졌을 때와 같이 이미지를 시각적으로 볼 수 없을 때 사용됩니다. alt 태그는 Markdown에서 일반적으로 지원됩니다.
 
-You may also add a title for your image—this doesn't impact SEO much but is displayed as a tooltip when hovering above the image, usually used to provide hints.
+이미지에 제목을 추가할 수도 있습니다. 이는 SEO에 큰 영향을 미치지는 않지만 이미지 위에 마우스를 올렸을 때 툴팁으로 표시되며, 일반적으로 힌트를 제공하는 데 사용됩니다.
 
 ```md
-![Docusaurus banner](./assets/docusaurus-asset-example-banner.png 'Image title')
+![Docusaurus 배너](./assets/docusaurus-asset-example-banner.png '이미지 제목')
 ```
 
 <BrowserWindow>
 
-![Docusaurus banner](./assets/docusaurus-asset-example-banner.png 'Image title')
+![Docusaurus 배너](./assets/docusaurus-asset-example-banner.png '이미지 제목')
 
 </BrowserWindow>
 
-## Rich search information {#rich-search-information}
+## 풍부한 검색 정보 {#rich-search-information}
 
-Docusaurus blogs support [rich search results](https://search.google.com/test/rich-results) out-of-the-box to get maximum search engine experience. The information is created depending on your meta information in blog/global configuration. In order to get the benefits of the rich search information, fill in the information about the post's publish date, authors, and image, etc. Read more about the meta-information [here](./blog.mdx).
+Docusaurus 블로그는 최대한의 검색 엔진 경험을 얻기 위해 기본적으로 [풍부한 검색 결과](https://search.google.com/test/rich-results)를 지원합니다. 이 정보는 블로그/전역 구성의 메타 정보에 따라 생성됩니다. 풍부한 검색 정보의 이점을 얻으려면 게시물의 발행 날짜, 작성자, 이미지 등에 대한 정보를 입력하세요. 메타 정보에 대해 [여기](./blog.mdx)에서 더 자세히 읽어보세요.
 
-## Robots file {#robots-file}
+## 로봇 파일 {#robots-file}
 
-A `robots.txt` file regulates search engines' behavior about which should be displayed and which shouldn't. You can provide it as [static asset](./static-assets.mdx). The following would allow access to all sub-pages from all requests:
+`robots.txt` 파일은 어떤 페이지를 표시하고 어떤 페이지를 표시하지 않아야 하는지에 대한 검색 엔진의 동작을 규제합니다. [정적 자산](./static-assets.mdx)으로 제공할 수 있습니다. 다음은 모든 요청에서 모든 하위 페이지에 대한 접근을 허용합니다:
 
 ```text title="static/robots.txt"
 User-agent: *
 Disallow:
 ```
 
-Read more about the robots file in [the Google documentation](https://developers.google.com/search/docs/advanced/robots/intro).
+로봇 파일에 대해 [Google 문서](https://developers.google.com/search/docs/advanced/robots/intro)에서 더 자세히 읽어보세요.
 
 :::warning
 
-**Important**: the `robots.txt` file does **not** prevent HTML pages from being indexed.
+**중요**: `robots.txt` 파일은 HTML 페이지가 인덱싱되는 것을 **방지하지 않습니다**.
 
-To prevent your whole Docusaurus site from being indexed, use the [`noIndex`](./api/docusaurus.config.js.mdx#noIndex) site config. Some [hosting providers](./deployment.mdx) may also let you configure a `X-Robots-Tag: noindex` HTTP header (GitHub Pages does not support this).
+전체 Docusaurus 사이트가 인덱싱되는 것을 방지하려면 [`noIndex`](./api/docusaurus.config.js.mdx#noIndex) 사이트 구성을 사용하세요. 일부 [호스팅 제공업체](./deployment.mdx)는 `X-Robots-Tag: noindex` HTTP 헤더를 구성할 수 있게 해줍니다(GitHub Pages는 이를 지원하지 않습니다).
 
-To prevent a single page from being indexed, use `<meta name="robots" content="noindex">` as [page metadata](#single-page-metadata). Read more about the [robots meta tag](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag).
+단일 페이지가 인덱싱되는 것을 방지하려면 [페이지 메타데이터](#single-page-metadata)로 `<meta name="robots" content="noindex">`를 사용하세요. [로봇 메타 태그](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag)에 대해 더 자세히 읽어보세요.
 
 :::
 
-## Sitemap file {#sitemap-file}
+## 사이트맵 파일 {#sitemap-file}
 
-Docusaurus provides the [`@docusaurus/plugin-sitemap`](./api/plugins/plugin-sitemap.mdx) plugin, which is shipped with `preset-classic` by default. It autogenerates a `sitemap.xml` file which will be available at `https://example.com/[baseUrl]/sitemap.xml` after the production build. This sitemap metadata helps search engine crawlers crawl your site more accurately.
+Docusaurus는 [`@docusaurus/plugin-sitemap`](./api/plugins/plugin-sitemap.mdx) 플러그인을 제공하며, 이는 기본적으로 `preset-classic`과 함께 제공됩니다. 이는 프로덕션 빌드 후 `https://example.com/[baseUrl]/sitemap.xml`에서 사용할 수 있는 `sitemap.xml` 파일을 자동 생성합니다. 이 사이트맵 메타데이터는 검색 엔진 크롤러가 사이트를 더 정확하게 크롤링하는 데 도움을 줍니다.
 
 :::tip
 
-The sitemap plugin automatically filters pages containing a `noindex` [robots meta directive](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag).
+사이트맵 플러그인은 `noindex` [로봇 메타 지시어](https://developers.google.com/search/docs/advanced/robots/robots_meta_tag)가 포함된 페이지를 자동으로 필터링합니다.
 
-For example, [`/examples/noIndex`](/examples/noIndex) is not included in the [Docusaurus sitemap.xml file](pathname:///sitemap.xml) because it contains the following [page metadata](#single-page-metadata):
+예를 들어, [`/examples/noIndex`](/examples/noIndex)는 [Docusaurus sitemap.xml 파일](pathname:///sitemap.xml)에 포함되지 않습니다. 왜냐하면 다음과 같은 [페이지 메타데이터](#single-page-metadata)를 포함하고 있기 때문입니다:
 
 ```html
 <head>
@@ -209,12 +209,12 @@ For example, [`/examples/noIndex`](/examples/noIndex) is not included in the [Do
 
 :::
 
-## Human readable links {#human-readable-links}
+## 사람이 읽을 수 있는 링크 {#human-readable-links}
 
-Docusaurus uses your file names as links, but you can always change that using slugs, see this [tutorial](./guides/docs/docs-create-doc.mdx#document-id) for more details.
+Docusaurus는 파일 이름을 링크로 사용하지만 슬러그를 사용하여 항상 변경할 수 있습니다. 자세한 내용은 이 [튜토리얼](./guides/docs/docs-create-doc.mdx#document-id)을 참조하세요.
 
-## Structured content {#structured-content}
+## 구조화된 콘텐츠 {#structured-content}
 
-Search engines rely on the HTML markup such as `<h2>`, `<table>`, etc., to understand the structure of your webpage. When Docusaurus renders your pages, semantic markup, e.g. `<aside>`, `<nav>`, `<main>`, are used to divide the different sections of the page, helping the search engine to locate parts like sidebar, navbar, and the main page content.
+검색 엔진은 웹페이지의 구조를 이해하기 위해 `<h2>`, `<table>` 등과 같은 HTML 마크업에 의존합니다. Docusaurus가 페이지를 렌더링할 때, `<aside>`, `<nav>`, `<main>`과 같은 의미론적 마크업이 사용되어 페이지의 다른 섹션을 구분하며, 이는 검색 엔진이 사이드바, 내비게이션 바, 메인 페이지 콘텐츠와 같은 부분을 찾는 데 도움을 줍니다.
 
-Most [CommonMark](https://spec.commonmark.org/0.30/#atx-headings) syntaxes have their corresponding HTML tags. By using Markdown consistently in your project, you will make it easier for search engines to understand your page content.
+대부분의 [CommonMark](https://spec.commonmark.org
