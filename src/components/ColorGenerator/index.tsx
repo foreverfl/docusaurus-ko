@@ -97,14 +97,13 @@ export default function ColorGenerator(): JSX.Element {
               wcagLink: (
                 <Link href="https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast">
                   <Translate id="colorGenerator.tip.body.wcagLink.label">
-                    WCAG-AA contrast ratio
+                    WCAG-AA 명암비 기준
                   </Translate>
                 </Link>
               ),
             }}>
             {
-              "Aim for at least {wcagLink} for the primary color to ensure readability. Use the Docusaurus website itself to preview how your color palette would look like. You can use alternative palettes in dark mode because one color doesn't usually work in both light and dark mode."
-            }
+              "가독성을 보장하기 위해 기본 색상에 대해 최소한 {wcagLink}를 목표로 하세요. Docusaurus 웹사이트 자체를 사용하여 색상 팔레트가 어떻게 보일지 미리 볼 수 있습니다. 일반적으로 하나의 색상이 라이트 모드와 다크 모드 모두에서 잘 작동하지 않기 때문에 다크 모드에서는 대체 팔레트를 사용할 수 있습니다."            }
           </Translate>
         </p>
       </Admonition>

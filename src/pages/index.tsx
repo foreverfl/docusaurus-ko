@@ -43,20 +43,20 @@ function HeroBanner() {
               __html: translate({
                 id: 'homepage.hero.title',
                 message:
-                  'Build <b>optimized</b> websites <b>quickly</b>, focus on your <b>content</b>',
+                  '빠르고 <b>최적화된</b> 웹사이트를 <b>구축</b>하고, <b>콘텐츠</b>에 집중하세요',
                 description:
-                  'Home page hero title, can contain simple html tags',
+                  '홈페이지 히어로 타이틀, 간단한 HTML 태그를 포함할 수 있음',
               }),
             }}
           />
         </Heading>
         <div className={styles.indexCtas}>
-          <Link className="button button--primary" to="/docs">
-            <Translate>Get Started</Translate>
-          </Link>
-          <Link className="button button--info" to="https://docusaurus.new">
-            <Translate>Try a Demo</Translate>
-          </Link>
+        <Link className="button button--primary" to="/docs">
+          <Translate>시작하기</Translate>
+        </Link>
+        <Link className="button button--info" to="https://docusaurus.new">
+          <Translate>데모 시도하기</Translate>
+        </Link>
           <span className={styles.indexCtasGitHubButtonWrapper}>
             <iframe
               className={styles.indexCtasGitHubButton}

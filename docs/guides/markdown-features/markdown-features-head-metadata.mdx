@@ -1,14 +1,14 @@
 ---
 id: head-metadata
-description: Declaring page-specific head metadata through MDX
+description: MDX를 통해 페이지별 head 메타데이터 선언하기
 slug: /markdown-features/head-metadata
 ---
 
-# Head metadata
+# Head 메타데이터
 
-## Customizing head metadata {#customizing-head-metadata}
+## Head 메타데이터 커스터마이징 {#customizing-head-metadata}
 
-Docusaurus automatically sets useful page metadata in `<html>`, `<head>` and `<body>` for you. It is possible to add extra metadata (or override existing ones) with the `<head>` tag in Markdown files:
+Docusaurus는 자동으로 `<html>`, `<head>`, `<body>`에 유용한 페이지 메타데이터를 설정합니다. Markdown 파일에서 `<head>` 태그를 사용하여 추가 메타데이터를 추가하거나 기존 메타데이터를 재정의할 수 있습니다:
 
 ```md title="markdown-features-head-metadata.mdx"
 ---
@@ -43,40 +43,40 @@ My text
 </head>
 ```
 
-This `<head>` declaration has been added to the current Markdown doc as a demo. Open your browser DevTools and check how this page's metadata has been affected.
+이 `<head>` 선언은 데모로 현재 Markdown 문서에 추가되었습니다. 브라우저 개발자 도구를 열어 이 페이지의 메타데이터가 어떻게 영향을 받았는지 확인해보세요.
 
 :::note
 
-This feature is built on top of the Docusaurus [`<Head>`](./../../docusaurus-core.mdx#head) component. Refer to [react-helmet](https://github.com/nfl/react-helmet) for exhaustive documentation.
+이 기능은 Docusaurus [`<Head>`](./../../docusaurus-core.mdx#head) 컴포넌트 위에 구축되었습니다. 자세한 문서는 [react-helmet](https://github.com/nfl/react-helmet)을 참조하세요.
 
 :::
 
-:::tip You don't need this for regular SEO
+:::tip 일반적인 SEO에는 이것이 필요하지 않습니다
 
-Content plugins (e.g. docs and blog) provide front matter options like `description`, `keywords`, and `image`, which will be automatically applied to both `description` and `og:description`, while you would have to manually declare two metadata tags when using the `<head>` tag.
+콘텐츠 플러그인(예: docs와 blog)은 `description`, `keywords`, `image`와 같은 프론트매터(front matter) 옵션을 제공하며, 이는 자동으로 `description`과 `og:description` 모두에 적용됩니다. 반면 `<head>` 태그를 사용할 때는 두 개의 메타데이터 태그를 수동으로 선언해야 합니다.
 
 :::
 
-## Markdown page description {#markdown-page-description}
+## Markdown 페이지 설명 {#markdown-page-description}
 
-The Markdown pages' description metadata may be used in more places than the head metadata. For example, the docs plugin's [generated category index](../docs/sidebar/items.mdx#generated-index-page) uses the description metadata for the doc cards.
+Markdown 페이지의 설명 메타데이터는 head 메타데이터 외의 다른 곳에서도 사용될 수 있습니다. 예를 들어, docs 플러그인의 [생성된 카테고리 인덱스](../docs/sidebar/items.mdx#generated-index-page)는 문서 카드에 설명 메타데이터를 사용합니다.
 
-By default, the description is the first content-ful line, with some efforts to convert it to plain text. For example, the following file...
+기본적으로 설명은 첫 번째 내용이 있는 줄로, 일반 텍스트로 변환하기 위한 몇 가지 노력이 포함됩니다. 예를 들어, 다음 파일은...
 
 ```md
-# Title
+# 제목
 
-Main content... May contain some [links](./file.mdx) or **emphasis**.
+메인 내용... 일부 [링크](./file.mdx)나 **강조**를 포함할 수 있습니다.
 ```
 
-...will have the default description "Main content... May contain some links or emphasis". However, **it's not designed to be fully functional**. Where it fails to produce reasonable descriptions, you can explicitly provide one through front matter:
+...기본 설명으로 "메인 내용... 일부 링크나 강조를 포함할 수 있습니다."를 갖게 됩니다. 그러나 **이는 완전히 기능적으로 설계되지 않았습니다**. 합리적인 설명을 생성하는 데 실패한 경우, 프론트매터(front matter)를 통해 명시적으로 제공할 수 있습니다:
 
 ```md
 ---
-description: This description will override the default.
+description: 이 설명은 기본값을 재정의합니다.
 ---
 
-# Title
+# 제목
 
-Main content... May contain some [links](./file.mdx) or **emphasis**.
+메인 내용... 일부 [링크](./file.mdx)나 **강조**를 포함할 수 있습니다.
 ```
