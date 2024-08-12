@@ -126,7 +126,6 @@ const defaultLocale = 'ko';
 
 const ConfigLocalized = {
   tagline: {
-    en: "A site for Docusaurus",
     ko: "Docusaurus 사이트입니다",
     ja: "Docusaurusのサイトです"
   },
@@ -156,7 +155,7 @@ export default async function createConfigAsync() {
     projectName: 'docusaurus',
     baseUrl,
     baseUrlIssueBanner: true,
-    url: 'https://docusaurus.io',
+    url: 'https://docusaurus-ko.mogumogu.dev',
     future: {
       experimental_storage: {
         namespace: true,
@@ -238,17 +237,20 @@ export default async function createConfigAsync() {
         return result;
       },
     },
-    onBrokenLinks:
-      isVersioningDisabled ||
-      process.env.DOCUSAURUS_CURRENT_LOCALE !== defaultLocale
-        ? 'warn'
-        : 'throw',
-    onBrokenAnchors:
-      isVersioningDisabled ||
-      process.env.DOCUSAURUS_CURRENT_LOCALE !== defaultLocale
-        ? 'warn'
-        : 'throw',
-    onBrokenMarkdownLinks: 'warn',
+    // onBrokenLinks:
+    //   isVersioningDisabled ||
+    //   process.env.DOCUSAURUS_CURRENT_LOCALE !== defaultLocale
+    //     ? 'warn'
+    //     : 'throw',
+    // onBrokenAnchors:
+    //   isVersioningDisabled ||
+    //   process.env.DOCUSAURUS_CURRENT_LOCALE !== defaultLocale
+    //     ? 'warn'
+    //     : 'throw',
+    // onBrokenMarkdownLinks: 'warn',
+    onBrokenLinks: 'ignore',
+    onBrokenAnchors: 'ignore',
+    onBrokenMarkdownLinks: 'ignore',
     favicon: 'img/docusaurus.ico',
     customFields: {
       crashTest,

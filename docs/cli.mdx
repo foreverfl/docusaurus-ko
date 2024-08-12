@@ -1,12 +1,12 @@
 ---
-description: Docusaurus provides a set of scripts to help you generate, serve, and deploy your website.
+설명: Docusaurus는 웹사이트를 생성, 제공 및 배포하는 데 도움이 되는 스크립트 세트를 제공합니다.
 ---
 
 # CLI
 
-Docusaurus provides a set of scripts to help you generate, serve, and deploy your website.
+Docusaurus는 웹사이트를 생성, 제공 및 배포하는 데 도움이 되는 스크립트 세트를 제공합니다.
 
-Once your website is bootstrapped, the website source will contain the Docusaurus scripts that you can invoke with your package manager:
+웹사이트가 부트스트랩되면 웹사이트 소스에는 패키지 관리자로 호출할 수 있는 Docusaurus 스크립트가 포함됩니다:
 
 ```json title="package.json"
 {
@@ -25,36 +25,36 @@ Once your website is bootstrapped, the website source will contain the Docusauru
 }
 ```
 
-## Docusaurus CLI commands {#docusaurus-cli-commands}
+## Docusaurus CLI 명령어 {#docusaurus-cli-commands}
 
-Below is a list of Docusaurus CLI commands and their usages:
+다음은 Docusaurus CLI 명령어 목록과 그 사용법입니다:
 
 ### `docusaurus start [siteDir]` {#docusaurus-start-sitedir}
 
-Builds and serves a preview of your site locally with [Webpack Dev Server](https://webpack.js.org/configuration/dev-server).
+[Webpack Dev Server](https://webpack.js.org/configuration/dev-server)를 사용하여 사이트의 미리보기를 로컬에서 빌드하고 제공합니다.
 
-#### Options {#options}
+#### 옵션 {#options}
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `--port` | `3000` | Specifies the port of the dev server. |
-| `--host` | `localhost` | Specify a host to use. For example, if you want your server to be accessible externally, you can use `--host 0.0.0.0`. |
-| `--locale` |  | Specify site locale to be used. |
-| `--hot-only` | `false` | Enables Hot Module Replacement without page refresh as a fallback in case of build failures. More information [here](https://webpack.js.org/configuration/dev-server/#devserverhotonly). |
-| `--no-open` | `false` | Do not open the page automatically in the browser. |
-| `--config` | `undefined` | Path to Docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
-| `--poll [optionalIntervalMs]` | `false` | Use polling of files rather than watching for live reload as a fallback in environments where watching doesn't work. More information [here](https://webpack.js.org/configuration/watch/#watchoptionspoll). |
-| `--no-minify` | `false` | Build website without minimizing JS/CSS bundles. |
+| `--port` | `3000` | 개발 서버의 포트를 지정합니다. |
+| `--host` | `localhost` | 사용할 호스트를 지정합니다. 예를 들어, 서버를 외부에서 접근 가능하게 하려면 `--host 0.0.0.0`을 사용할 수 있습니다. |
+| `--locale` |  | 사용할 사이트 로케일을 지정합니다. |
+| `--hot-only` | `false` | 빌드 실패 시 페이지 새로 고침 없이 핫 모듈 교체를 활성화합니다. 자세한 정보는 [여기](https://webpack.js.org/configuration/dev-server/#devserverhotonly)에서 확인할 수 있습니다. |
+| `--no-open` | `false` | 브라우저에서 페이지를 자동으로 열지 않습니다. |
+| `--config` | `undefined` | Docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
+| `--poll [optionalIntervalMs]` | `false` | 감시가 작동하지 않는 환경에서 라이브 리로드를 위한 대체 방법으로 파일 폴링을 사용합니다. 자세한 정보는 [여기](https://webpack.js.org/configuration/watch/#watchoptionspoll)에서 확인할 수 있습니다. |
+| `--no-minify` | `false` | JS/CSS 번들을 최소화하지 않고 웹사이트를 빌드합니다. |
 
 :::info
 
-Please note that some functionality (for example, anchor links) will not work in development. The functionality will work as expected in production.
+개발 환경에서는 일부 기능(예: 앵커 링크)이 작동하지 않을 수 있습니다. 이 기능은 프로덕션 환경에서 예상대로 작동할 것입니다.
 
 :::
 
-:::info Development over network
+:::info 네트워크를 통한 개발
 
-When forwarding port 3000 from a remote server or VM (e.g. GitHub Codespaces), you can run the dev server on `0.0.0.0` to make it listen on the local IP.
+원격 서버나 VM(예: GitHub Codespaces)에서 포트 3000을 포워딩할 때, 로컬 IP에서 수신하도록 개발 서버를 `0.0.0.0`에서 실행할 수 있습니다.
 
 ```bash npm2yarn
 npm run start -- --host 0.0.0.0
@@ -62,48 +62,48 @@ npm run start -- --host 0.0.0.0
 
 :::
 
-#### Enabling HTTPS {#enabling-https}
+#### HTTPS 활성화하기 {#enabling-https}
 
-There are multiple ways to obtain a certificate. We will use [mkcert](https://github.com/FiloSottile/mkcert) as an example.
+인증서를 얻는 여러 방법이 있습니다. 예시로 [mkcert](https://github.com/FiloSottile/mkcert)를 사용하겠습니다.
 
-1. Run `mkcert localhost` to generate `localhost.pem` + `localhost-key.pem`
+1. `mkcert localhost`를 실행하여 `localhost.pem` + `localhost-key.pem`을 생성합니다.
 
-2. Run `mkcert -install` to install the cert in your trust store, and restart your browser
+2. `mkcert -install`을 실행하여 인증서를 신뢰 저장소에 설치하고 브라우저를 재시작합니다.
 
-3. Start the app with Docusaurus HTTPS env variables:
+3. Docusaurus HTTPS 환경 변수와 함께 앱을 시작합니다:
 
 ```bash
 HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem yarn start
 ```
 
-4. Open `https://localhost:3000/`
+4. `https://localhost:3000/`을 엽니다.
 
 ### `docusaurus build [siteDir]` {#docusaurus-build-sitedir}
 
-Compiles your site for production.
+프로덕션용 사이트를 컴파일합니다.
 
-#### Options {#options-1}
+#### 옵션 {#options-1}
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `--dev` |  | Builds the website in dev mode, including full React error messages. |
-| `--bundle-analyzer` | `false` | Analyze your bundle with the [webpack bundle analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). |
-| `--out-dir` | `build` | The full path for the new output directory, relative to the current workspace. |
-| `--config` | `undefined` | Path to Docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
-| `--locale` |  | Build the site in the specified locale. If not specified, all known locales are built. |
-| `--no-minify` | `false` | Build website without minimizing JS/CSS bundles. |
+| `--dev` |  | 전체 React 오류 메시지를 포함하여 개발 모드로 웹사이트를 빌드합니다. |
+| `--bundle-analyzer` | `false` | [webpack bundle analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)로 번들을 분석합니다. |
+| `--out-dir` | `build` | 현재 작업 공간을 기준으로 한 새 출력 디렉토리의 전체 경로입니다. |
+| `--config` | `undefined` | Docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
+| `--locale` |  | 지정된 로케일로 사이트를 빌드합니다. 지정되지 않으면 알려진 모든 로케일로 빌드됩니다. |
+| `--no-minify` | `false` | JS/CSS 번들을 최소화하지 않고 웹사이트를 빌드합니다. |
 
 :::info
 
-For advanced minification of CSS bundle, we use the [advanced cssnano preset](https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-advanced) (along with additional several PostCSS plugins) and [level 2 optimization of clean-css](https://github.com/jakubpawlowicz/clean-css#level-2-optimizations). If as a result of this advanced CSS minification you find broken CSS, build your website with the environment variable `USE_SIMPLE_CSS_MINIFIER=true` to minify CSS with the [default cssnano preset](https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-default). **Please [fill out an issue](https://github.com/facebook/docusaurus/issues/new?labels=bug%2C+needs+triage&template=bug.md) if you experience CSS minification bugs.**
+CSS 번들의 고급 최소화를 위해 [advanced cssnano preset](https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-advanced)(추가 PostCSS 플러그인과 함께)과 [clean-css의 level 2 최적화](https://github.com/jakubpawlowicz/clean-css#level-2-optimizations)를 사용합니다. 이 고급 CSS 최소화로 인해 CSS가 깨진 경우, 환경 변수 `USE_SIMPLE_CSS_MINIFIER=true`를 사용하여 [default cssnano preset](https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-default)으로 CSS를 최소화하여 웹사이트를 빌드하세요. **CSS 최소화 버그를 경험하셨다면 [이슈를 작성](https://github.com/facebook/docusaurus/issues/new?labels=bug%2C+needs+triage&template=bug.md)해 주세요.**
 
-You can skip the HTML minification with the environment variable `SKIP_HTML_MINIFICATION=true`.
+환경 변수 `SKIP_HTML_MINIFICATION=true`를 사용하여 HTML 최소화를 건너뛸 수 있습니다.
 
 :::
 
 ### `docusaurus swizzle [themeName] [componentName] [siteDir]` {#docusaurus-swizzle}
 
-[Swizzle](./swizzling.mdx) a theme component to customize it.
+테마 컴포넌트를 [Swizzle](./swizzling.mdx)하여 커스터마이즈합니다.
 
 ```bash npm2yarn
 npm run swizzle [themeName] [componentName] [siteDir]
@@ -112,79 +112,79 @@ npm run swizzle [themeName] [componentName] [siteDir]
 npm run swizzle @docusaurus/theme-classic Footer -- --eject
 ```
 
-The swizzle CLI is interactive and will guide you through the whole [swizzle process](./swizzling.mdx).
+swizzle CLI는 대화형이며 전체 [swizzle 과정](./swizzling.mdx)을 안내합니다.
 
-#### Options {#options-swizzle}
+#### 옵션 {#options-swizzle}
 
-| Name | Description |
+| 이름 | 설명 |
 | --- | --- |
-| `themeName` | The name of the theme to swizzle from. |
-| `componentName` | The name of the theme component to swizzle. |
-| `--list` | Display components available for swizzling |
-| `--eject` | [Eject](./swizzling.mdx#ejecting) the theme component |
-| `--wrap` | [Wrap](./swizzling.mdx#wrapping) the theme component |
-| `--danger` | Allow immediate swizzling of unsafe components |
-| `--typescript` | Swizzle the TypeScript variant component |
-| `--config` | Path to docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
+| `themeName` | swizzle할 테마의 이름입니다. |
+| `componentName` | swizzle할 테마 컴포넌트의 이름입니다. |
+| `--list` | swizzle 가능한 컴포넌트를 표시합니다 |
+| `--eject` | 테마 컴포넌트를 [이젝트](./swizzling.mdx#ejecting)합니다 |
+| `--wrap` | 테마 컴포넌트를 [래핑](./swizzling.mdx#wrapping)합니다 |
+| `--danger` | 안전하지 않은 컴포넌트의 즉시 swizzle을 허용합니다 |
+| `--typescript` | TypeScript 변형 컴포넌트를 swizzle합니다 |
+| `--config` | docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
 
 :::warning
 
-Unsafe components have a higher risk of breaking changes due to internal refactorings.
+안전하지 않은 컴포넌트는 내부 리팩토링으로 인해 변경 사항이 발생할 위험이 더 높습니다.
 
 :::
 
 ### `docusaurus deploy [siteDir]` {#docusaurus-deploy-sitedir}
 
-Deploys your site with [GitHub Pages](https://pages.github.com/). Check out the docs on [deployment](deployment.mdx#deploying-to-github-pages) for more details.
+[GitHub Pages](https://pages.github.com/)로 사이트를 배포합니다. 자세한 내용은 [배포](deployment.mdx#deploying-to-github-pages) 문서를 확인하세요.
 
-#### Options {#options-3}
+#### 옵션 {#options-3}
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `--locale` |  | Deploy the site in the specified locale. If not specified, all known locales are deployed. |
-| `--out-dir` | `build` | The full path for the new output directory, relative to the current workspace. |
-| `--skip-build` | `false` | Deploy website without building it. This may be useful when using a custom deploy script. |
-| `--target-dir` | `.` | Path to the target directory to deploy to. |
-| `--config` | `undefined` | Path to Docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
+| `--locale` |  | 지정된 로케일로 사이트를 배포합니다. 지정되지 않으면 알려진 모든 로케일로 배포됩니다. |
+| `--out-dir` | `build` | 현재 작업 공간을 기준으로 한 새 출력 디렉토리의 전체 경로입니다. |
+| `--skip-build` | `false` | 웹사이트를 빌드하지 않고 배포합니다. 사용자 정의 배포 스크립트를 사용할 때 유용할 수 있습니다. |
+| `--target-dir` | `.` | 배포할 대상 디렉토리의 경로입니다. |
+| `--config` | `undefined` | Docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
 
 ### `docusaurus serve [siteDir]` {#docusaurus-serve-sitedir}
 
-Serve your built website locally.
+빌드된 웹사이트를 로컬에서 제공합니다.
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `--port` | `3000` | Use specified port |
-| `--dir` | `build` | The full path for the output directory, relative to the current workspace |
-| `--build` | `false` | Build website before serving |
-| `--config` | `undefined` | Path to Docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
-| `--host` | `localhost` | Specify a host to use. For example, if you want your server to be accessible externally, you can use `--host 0.0.0.0`. |
-| `--no-open` | `false` locally, `true` in CI | Do not open a browser window to the server location. |
+| `--port` | `3000` | 지정된 포트 사용 |
+| `--dir` | `build` | 현재 작업 공간을 기준으로 한 출력 디렉토리의 전체 경로 |
+| `--build` | `false` | 제공하기 전에 웹사이트 빌드 |
+| `--config` | `undefined` | Docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
+| `--host` | `localhost` | 사용할 호스트를 지정합니다. 예를 들어, 서버를 외부에서 접근 가능하게 하려면 `--host 0.0.0.0`을 사용할 수 있습니다. |
+| `--no-open` | `false` (로컬), `true` (CI) | 서버 위치로 브라우저 창을 열지 않습니다. |
 
 ### `docusaurus clear [siteDir]` {#docusaurus-clear-sitedir}
 
-Clear a Docusaurus site's generated assets, caches, build artifacts.
+Docusaurus 사이트의 생성된 자산, 캐시, 빌드 아티팩트를 지웁니다.
 
-We recommend running this command before reporting bugs, after upgrading versions, or anytime you have issues with your Docusaurus site.
+버그를 보고하기 전, 버전 업그레이드 후, 또는 Docusaurus 사이트에 문제가 있을 때마다 이 명령을 실행하는 것이 좋습니다.
 
 ### `docusaurus write-translations [siteDir]` {#docusaurus-write-translations-sitedir}
 
-Write the JSON translation files that you will have to translate.
+번역해야 할 JSON 번역 파일을 작성합니다.
 
-By default, the files are written in `website/i18n/<defaultLocale>/...`.
+기본적으로 파일은 `website/i18n/<defaultLocale>/...`에 작성됩니다.
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `--locale` | `<defaultLocale>` | Define which locale folder you want to write translations the JSON files in |
-| `--override` | `false` | Override existing translation messages |
-| `--config` | `undefined` | Path to Docusaurus config file, default to `[siteDir]/docusaurus.config.js` |
-| `--messagePrefix` | `''` | Allows adding a prefix to each translation message, to help you highlight untranslated strings |
+| `--locale` | `<defaultLocale>` | JSON 파일을 작성할 로케일 폴더를 정의합니다 |
+| `--override` | `false` | 기존 번역 메시지를 덮어씁니다 |
+| `--config` | `undefined` | Docusaurus 설정 파일 경로, 기본값은 `[siteDir]/docusaurus.config.js` |
+| `--messagePrefix` | `''` | 각 번역 메시지에 접두사를 추가하여 번역되지 않은 문자열을 강조할 수 있습니다 |
 
 ### `docusaurus write-heading-ids [siteDir] [files]` {#docusaurus-write-heading-ids-sitedir}
 
-Add [explicit heading IDs](./guides/markdown-features/markdown-features-toc.mdx#heading-ids) to the Markdown documents of your site.
+사이트의 Markdown 문서에 [명시적 제목 ID](./guides/markdown-features/markdown-features-toc.mdx#heading-ids)를 추가합니다.
 
-| Name | Default | Description |
+| 이름 | 기본값 | 설명 |
 | --- | --- | --- |
-| `files` | All MD files used by plugins | The files that you want heading IDs to be written to. |
-| `--maintain-case` | `false` | Keep the headings' casing, otherwise make all lowercase. |
-| `--overwrite` | `false` | Overwrite existing heading IDs. |
+| `files` | 플러그인에서 사용하는 모든 MD 파일 | 제목 ID를 작성할 파일입니다.
+| --maintain-case | false | 제목의 대소문자를 유지합니다. 그렇지 않으면 모두 소문자로 변경합니다. |
+| --overwrite | false | 기존 제목 ID를 덮어씁니다. |

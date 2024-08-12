@@ -38,7 +38,7 @@ import APITable from '@site/src/components/APITable';
 export default {
   title: 'Docusaurus',
   url: 'https://docusaurus.io',
-  // 사이트 구성 ...
+  // your site config ...
 };
 ```
 
@@ -47,7 +47,7 @@ export default async function createConfigAsync() {
   return {
     title: 'Docusaurus',
     url: 'https://docusaurus.io',
-    // 사이트 구성 ...
+    // your site config ...
   };
 }
 ```
@@ -272,7 +272,7 @@ Docusaurus의 `Heading` 컴포넌트로 선언된 깨진 앵커를 감지했을 
 ```js title="docusaurus.config.js"
 export default {
   tagline:
-    'Docusaurus를 사용하면 오픈 소스 문서 웹사이트를 쉽게 유지 관리할 수 있습니다.',
+    'Docusaurus makes it easy to maintain Open Source documentation websites.',
 };
 ```
 
@@ -284,7 +284,7 @@ export default {
 
 ```js title="docusaurus.config.js"
 export default {
-  // Docusaurus의 조직은 facebook입니다
+  // Docusaurus' organization is facebook
   organizationName: 'facebook',
 };
 ```
@@ -360,9 +360,9 @@ export default {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: '사이트 제목',
+      title: 'Site Title',
       logo: {
-        alt: '사이트 로고',
+        alt: 'Site Logo',
         src: 'img/logo.svg',
         width: 32,
         height: 32,
@@ -374,31 +374,31 @@ export default {
           label: 'docusaurus.config.js',
           position: 'left',
         },
-        // ... 다른 링크
+        // ... other links
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: '문서',
+          title: 'Docs',
           items: [
             {
-              label: '문서',
+              label: 'Docs',
               to: 'docs/doc1',
             },
           ],
         },
-        // ... 다른 링크
+        // ... other links
       ],
       logo: {
-        alt: 'Meta 오픈 소스 로고',
+        alt: 'Meta Open Source Logo',
         src: 'img/meta_oss_logo.png',
         href: 'https://opensource.fb.com',
         width: 160,
         height: 51,
       },
-      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`, // 여기에 자체 HTML을 넣을 수도 있습니다
+      copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`, // You can also put own HTML here
     },
   },
 };
@@ -421,7 +421,7 @@ export default {
     ['docusuarus-plugin-confetti', {fancy: false}],
     () => ({
       postBuild() {
-        console.log('빌드 완료');
+        console.log('Build finished');
       },
     }),
   ],
@@ -491,7 +491,7 @@ type MarkdownConfig = {
   preprocessor?: MarkdownPreprocessor;
   parseFrontMatter?: ParseFrontMatter;
   mdx1Compat: MDX1CompatOptions;
-  remarkRehypeOptions: object; // https://github.com/remarkjs/remark-rehype#options 참조
+  remarkRehypeOptions: object; // see https://github.com/remarkjs/remark-rehype#options
   anchors: MarkdownAnchorsConfig;
 };
 ```
@@ -614,9 +614,9 @@ export default {
 ```js title="docusaurus.config.js"
 export default {
   scripts: [
-    // 문자열 형식
+    // String format.
     'https://docusaurus.io/script.js',
-    // 객체 형식
+    // Object format.
     {
       src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js',
       async: true,
@@ -636,9 +636,9 @@ export default {
 ```js title="docusaurus.config.js"
 export default {
   stylesheets: [
-    // 문자열 형식
+    // String format.
     'https://docusaurus.io/style.css',
-    // 객체 형식
+    // Object format.
     {
       href: 'http://mydomain.com/style.css',
     },
@@ -666,7 +666,7 @@ export default {
 
 ### `ssrTemplate` {#ssrTemplate}
 
-애플리케이션을 렌더링하는 데 사용될 [Eta의 구문](https://eta.js.org/docs/syntax#syntax-overview)으로 작성된 HTML 템플릿입니다. 이를 사용하여 `body` 태그에 사용자 정의 속성을 설정하거나, 추가 `meta` 태그를 설정하거나, `viewport`를 사용자 정의하는 등의 작업을 할 수 있습니다. Docusaurus가 제대로 작동하려면 템플릿이 올바르게 구조화되어 있어야 한다는 점에 유의하세요. 일단 사용자 정의하면 템플릿이 상위 요구 사항을 준수하는지 확인해야 합니다.
+애플리케이션을 렌더링하는 데 사용될 [Eta의 구문](https://eta.js.org/docs)으로 작성된 HTML 템플릿입니다. 이를 사용하여 `body` 태그에 사용자 정의 속성을 설정하거나, 추가 `meta` 태그를 설정하거나, `viewport`를 사용자 정의하는 등의 작업을 할 수 있습니다. Docusaurus가 제대로 작동하려면 템플릿이 올바르게 구조화되어 있어야 한다는 점에 유의하세요. 일단 사용자 정의하면 템플릿이 상위 요구 사항을 준수하는지 확인해야 합니다.
 
 - 타입: `string`
 
