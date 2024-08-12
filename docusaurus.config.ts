@@ -267,155 +267,155 @@ export default async function createConfigAsync() {
       path.join(__dirname, '_dogfooding/non-existent'),
     ],
     themes: ['live-codeblock', ...dogfoodingThemeInstances],
-    plugins: [
-      [
-        './src/plugins/changelog/index.js',
-        {
-          blogTitle: 'Docusaurus changelog',
-          blogDescription:
-            'Keep yourself up-to-date about new features in every release',
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: 'Changelog',
-          routeBasePath: '/changelog',
-          showReadingTime: false,
-          postsPerPage: 20,
-          archiveBasePath: null,
-          authorsMapPath: 'authors.json',
-          feedOptions: {
-            type: 'all',
-            title: 'Docusaurus changelog',
-            description:
-              'Keep yourself up-to-date about new features in every release',
-            copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
-            language: defaultLocale,
-          },
-          // onInlineAuthors: 'warn',
-        },
-      ],
-      [
-        'content-docs',
-        {
-          id: 'community',
-          path: 'community',
-          routeBasePath: 'community',
-          editUrl: ({locale, versionDocsDirPath, docPath}) => {
-            if (locale !== defaultLocale) {
-              return `https://crowdin.com/project/docusaurus-v2/${locale}`;
-            }
-            return `https://github.com/facebook/docusaurus/edit/main/website/${versionDocsDirPath}/${docPath}`;
-          },
-          remarkPlugins: [npm2yarn],
-          editCurrentVersion: true,
-          sidebarPath: './sidebarsCommunity.js',
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-        } satisfies DocsOptions,
-      ],
-      [
-        'client-redirects',
-        {
-          fromExtensions: ['html'],
-          createRedirects(routePath) {
-            // Redirect to /docs from /docs/introduction (now docs root doc)
-            if (routePath === '/docs' || routePath === '/docs/') {
-              return [`${routePath}/introduction`];
-            }
-            return [];
-          },
-          redirects: [
-            {
-              from: ['/docs/support', '/docs/next/support'],
-              to: '/community/support',
-            },
-            {
-              from: ['/docs/team', '/docs/next/team'],
-              to: '/community/team',
-            },
-            {
-              from: ['/docs/resources', '/docs/next/resources'],
-              to: '/community/resources',
-            },
-            ...dogfoodingRedirects,
-          ],
-        } satisfies ClientRedirectsOptions,
-      ],
-      [
-        'ideal-image',
+    // plugins: [
+    //   [
+    //     './src/plugins/changelog/index.js',
+    //     {
+    //       blogTitle: 'Docusaurus changelog',
+    //       blogDescription:
+    //         'Keep yourself up-to-date about new features in every release',
+    //       blogSidebarCount: 'ALL',
+    //       blogSidebarTitle: 'Changelog',
+    //       routeBasePath: '/changelog',
+    //       showReadingTime: false,
+    //       postsPerPage: 20,
+    //       archiveBasePath: null,
+    //       authorsMapPath: 'authors.json',
+    //       feedOptions: {
+    //         type: 'all',
+    //         title: 'Docusaurus changelog',
+    //         description:
+    //           'Keep yourself up-to-date about new features in every release',
+    //         copyright: `Copyright © ${new Date().getFullYear()} Facebook, Inc.`,
+    //         language: defaultLocale,
+    //       },
+    //       // onInlineAuthors: 'warn',
+    //     },
+    //   ],
+    //   [
+    //     'content-docs',
+    //     {
+    //       id: 'community',
+    //       path: 'community',
+    //       routeBasePath: 'community',
+    //       editUrl: ({locale, versionDocsDirPath, docPath}) => {
+    //         if (locale !== defaultLocale) {
+    //           return `https://crowdin.com/project/docusaurus-v2/${locale}`;
+    //         }
+    //         return `https://github.com/facebook/docusaurus/edit/main/website/${versionDocsDirPath}/${docPath}`;
+    //       },
+    //       remarkPlugins: [npm2yarn],
+    //       editCurrentVersion: true,
+    //       sidebarPath: './sidebarsCommunity.js',
+    //       showLastUpdateAuthor: true,
+    //       showLastUpdateTime: true,
+    //     } satisfies DocsOptions,
+    //   ],
+    //   [
+    //     'client-redirects',
+    //     {
+    //       fromExtensions: ['html'],
+    //       createRedirects(routePath) {
+    //         // Redirect to /docs from /docs/introduction (now docs root doc)
+    //         if (routePath === '/docs' || routePath === '/docs/') {
+    //           return [`${routePath}/introduction`];
+    //         }
+    //         return [];
+    //       },
+    //       redirects: [
+    //         {
+    //           from: ['/docs/support', '/docs/next/support'],
+    //           to: '/community/support',
+    //         },
+    //         {
+    //           from: ['/docs/team', '/docs/next/team'],
+    //           to: '/community/team',
+    //         },
+    //         {
+    //           from: ['/docs/resources', '/docs/next/resources'],
+    //           to: '/community/resources',
+    //         },
+    //         ...dogfoodingRedirects,
+    //       ],
+    //     } satisfies ClientRedirectsOptions,
+    //   ],
+    //   [
+    //     'ideal-image',
 
-        {
-          quality: 70,
-          max: 1030,
-          min: 640,
-          steps: 2,
-          // Use false to debug, but it incurs huge perf costs
-          disableInDev: true,
-        } satisfies IdealImageOptions,
-      ],
-      [
-        'pwa',
-        {
-          // debug: isDeployPreview,
-          offlineModeActivationStrategies: [
-            'appInstalled',
-            'standalone',
-            'queryString',
-          ],
-          // swRegister: false,
-          swCustom: require.resolve('./src/sw.js'), // TODO make it possible to use relative path
-          pwaHead: [
-            {
-              tagName: 'link',
-              rel: 'icon',
-              href: 'img/docusaurus.png',
-            },
-            {
-              tagName: 'link',
-              rel: 'manifest',
-              href: 'manifest.json',
-            },
-            {
-              tagName: 'meta',
-              name: 'theme-color',
-              content: 'rgb(37, 194, 160)',
-            },
-            {
-              tagName: 'meta',
-              name: 'apple-mobile-web-app-capable',
-              content: 'yes',
-            },
-            {
-              tagName: 'meta',
-              name: 'apple-mobile-web-app-status-bar-style',
-              content: '#000',
-            },
-            {
-              tagName: 'link',
-              rel: 'apple-touch-icon',
-              href: 'img/docusaurus.png',
-            },
-            {
-              tagName: 'link',
-              rel: 'mask-icon',
-              href: 'img/docusaurus.png',
-              color: 'rgb(62, 204, 94)',
-            },
-            {
-              tagName: 'meta',
-              name: 'msapplication-TileImage',
-              content: 'img/docusaurus.png',
-            },
-            {
-              tagName: 'meta',
-              name: 'msapplication-TileColor',
-              content: '#000',
-            },
-          ],
-        },
-      ],
-      '@docusaurus/theme-mermaid',
-      './src/plugins/featureRequests/FeatureRequestsPlugin.js',
-      ...dogfoodingPluginInstances,
-    ],
+    //     {
+    //       quality: 70,
+    //       max: 1030,
+    //       min: 640,
+    //       steps: 2,
+    //       // Use false to debug, but it incurs huge perf costs
+    //       disableInDev: true,
+    //     } satisfies IdealImageOptions,
+    //   ],
+    //   [
+    //     'pwa',
+    //     {
+    //       // debug: isDeployPreview,
+    //       offlineModeActivationStrategies: [
+    //         'appInstalled',
+    //         'standalone',
+    //         'queryString',
+    //       ],
+    //       // swRegister: false,
+    //       swCustom: require.resolve('./src/sw.js'), // TODO make it possible to use relative path
+    //       pwaHead: [
+    //         {
+    //           tagName: 'link',
+    //           rel: 'icon',
+    //           href: 'img/docusaurus.png',
+    //         },
+    //         {
+    //           tagName: 'link',
+    //           rel: 'manifest',
+    //           href: 'manifest.json',
+    //         },
+    //         {
+    //           tagName: 'meta',
+    //           name: 'theme-color',
+    //           content: 'rgb(37, 194, 160)',
+    //         },
+    //         {
+    //           tagName: 'meta',
+    //           name: 'apple-mobile-web-app-capable',
+    //           content: 'yes',
+    //         },
+    //         {
+    //           tagName: 'meta',
+    //           name: 'apple-mobile-web-app-status-bar-style',
+    //           content: '#000',
+    //         },
+    //         {
+    //           tagName: 'link',
+    //           rel: 'apple-touch-icon',
+    //           href: 'img/docusaurus.png',
+    //         },
+    //         {
+    //           tagName: 'link',
+    //           rel: 'mask-icon',
+    //           href: 'img/docusaurus.png',
+    //           color: 'rgb(62, 204, 94)',
+    //         },
+    //         {
+    //           tagName: 'meta',
+    //           name: 'msapplication-TileImage',
+    //           content: 'img/docusaurus.png',
+    //         },
+    //         {
+    //           tagName: 'meta',
+    //           name: 'msapplication-TileColor',
+    //           content: '#000',
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   '@docusaurus/theme-mermaid',
+    //   './src/plugins/featureRequests/FeatureRequestsPlugin.js',
+    //   ...dogfoodingPluginInstances,
+    // ],
     presets: [
       [
         'classic',
